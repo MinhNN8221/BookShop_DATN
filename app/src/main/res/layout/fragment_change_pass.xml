@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/secondary"
+    android:id="@+id/layout_ChangePassword"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text_changePass"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginEnd="@dimen/dp_24"
+        android:gravity="top"
+        android:text="@string/changepassword"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_left"
+        android:layout_width="@dimen/dp_34"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_24"
+        android:layout_marginTop="22dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_left" />
+
+    <TextView
+        android:id="@+id/text_current_pass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="@string/current"
+        android:textSize="20dp"
+        android:textColor="@color/primary"
+        app:layout_constraintEnd_toEndOf="@+id/text_changePass"
+        app:layout_constraintStart_toStartOf="@+id/image_left"
+        app:layout_constraintTop_toBottomOf="@+id/image_left" />
+
+    <EditText
+        android:id="@+id/edit_current_pass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="17"
+        android:textColor="@color/black"
+        android:inputType="textPassword"
+        android:layout_marginLeft="-4dp"
+        app:layout_constraintEnd_toEndOf="@+id/text_changePass"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/text_current_pass"
+        app:layout_constraintTop_toBottomOf="@+id/text_current_pass" />
+    <ImageView
+        android:id="@+id/image_eye_currentPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_visible_eye"
+        app:layout_constraintBottom_toBottomOf="@id/edit_current_pass"
+        app:layout_constraintRight_toRightOf="@id/edit_current_pass"
+        app:layout_constraintTop_toTopOf="@id/edit_current_pass" />
+    <TextView
+        android:id="@+id/text_new_pass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/newpass"
+        android:layout_marginTop="10dp"
+        android:textSize="18dp"
+        android:textColor="@color/primary"
+        app:layout_constraintStart_toStartOf="@+id/text_current_pass"
+        app:layout_constraintEnd_toEndOf="@+id/text_current_pass"
+        app:layout_constraintTop_toBottomOf="@+id/edit_current_pass" />
+
+    <EditText
+        android:id="@+id/edit_new_pass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="17"
+        android:textColor="@color/black"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/edit_current_pass"
+        app:layout_constraintStart_toStartOf="@+id/edit_current_pass"
+        app:layout_constraintTop_toBottomOf="@+id/text_new_pass" />
+    <ImageView
+        android:id="@+id/image_eye_newPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_visible_eye"
+        app:layout_constraintBottom_toBottomOf="@id/edit_new_pass"
+        app:layout_constraintRight_toRightOf="@id/edit_new_pass"
+        app:layout_constraintTop_toTopOf="@id/edit_new_pass" />
+    <TextView
+        android:id="@+id/text_confirm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm"
+        android:textSize="18dp"
+        android:textColor="@color/primary"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@+id/text_current_pass"
+        app:layout_constraintEnd_toEndOf="@+id/edit_current_pass"
+        app:layout_constraintTop_toBottomOf="@+id/edit_new_pass" />
+
+    <EditText
+        android:id="@+id/edit_confirm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="17"
+        android:textColor="@color/black"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/edit_current_pass"
+        app:layout_constraintStart_toStartOf="@+id/edit_current_pass"
+        app:layout_constraintTop_toBottomOf="@+id/text_confirm" />
+    <ImageView
+        android:id="@+id/image_eye_confirmPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_visible_eye"
+        app:layout_constraintBottom_toBottomOf="@id/edit_confirm"
+        app:layout_constraintRight_toRightOf="@id/edit_confirm"
+        app:layout_constraintTop_toTopOf="@id/edit_confirm" />
+    <TextView
+        android:id="@+id/text_update_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_btn_signin"
+        android:paddingLeft="64dp"
+        android:paddingTop="21dp"
+        android:paddingRight="64dp"
+        android:paddingBottom="21dp"
+        android:layout_marginTop="31dp"
+        android:textSize="16dp"
+        android:text="@string/update"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/edit_confirm"
+        app:layout_constraintStart_toStartOf="@+id/edit_confirm"
+        app:layout_constraintTop_toBottomOf="@+id/edit_confirm" />
+</androidx.constraintlayout.widget.ConstraintLayout>

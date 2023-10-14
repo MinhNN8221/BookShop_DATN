@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondary"
+    tools:context=".ui.auth.signup.SignUpFragment">
+
+    <TextView
+        android:id="@+id/text_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:text="@string/textRegister"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/dp_30"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_name"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="71dp"
+        android:background="@drawable/bg_auth_text_field"
+        android:hint="@string/username"
+        android:inputType="textPersonName"
+        android:textColor="@color/gray"
+        android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="@id/text_description"
+        app:layout_constraintStart_toStartOf="@id/text_description"
+        app:layout_constraintTop_toBottomOf="@id/text_description" />
+
+    <EditText
+        android:id="@+id/edit_email"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_auth_text_field"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/gray"
+        android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="@id/edit_name"
+        app:layout_constraintStart_toStartOf="@id/edit_name"
+        app:layout_constraintTop_toBottomOf="@id/edit_name" />
+
+    <EditText
+        android:id="@+id/edit_password"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_auth_text_field"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textColor="@color/gray"
+        android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="@id/edit_name"
+        app:layout_constraintStart_toStartOf="@id/edit_name"
+        app:layout_constraintTop_toBottomOf="@id/edit_email" />
+
+    <ImageView
+        android:id="@+id/image_eye_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_visible_eye"
+        app:layout_constraintBottom_toBottomOf="@id/edit_password"
+        app:layout_constraintRight_toRightOf="@id/edit_password"
+        app:layout_constraintTop_toTopOf="@id/edit_password" />
+
+    <EditText
+        android:id="@+id/edit_confirmPassword"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_auth_text_field"
+        android:hint="@string/confirm_password"
+        android:inputType="textPassword"
+        android:textColor="@color/gray"
+        android:textColorHint="@color/gray"
+        app:layout_constraintEnd_toEndOf="@id/edit_name"
+        app:layout_constraintStart_toStartOf="@id/edit_name"
+        app:layout_constraintTop_toBottomOf="@id/edit_password" />
+
+    <ImageView
+        android:id="@+id/image_eye_confirmPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_visible_eye"
+        app:layout_constraintBottom_toBottomOf="@id/edit_confirmPassword"
+        app:layout_constraintRight_toRightOf="@id/edit_confirmPassword"
+        app:layout_constraintTop_toTopOf="@id/edit_confirmPassword" />
+
+    <Button
+        android:id="@+id/button_register"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bg_auth_button"
+        android:text="@string/register"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="@id/edit_name"
+        app:layout_constraintStart_toStartOf="@id/edit_name"
+        app:layout_constraintTop_toBottomOf="@id/edit_confirmPassword" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/text_desLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bạn đã có tài khoản?"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/text_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:text="Đăng nhập ngay!"
+            android:textColor="@color/status"
+            android:textSize="15dp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

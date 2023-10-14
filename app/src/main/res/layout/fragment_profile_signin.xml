@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/text_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginEnd="35dp"
+        android:gravity="top"
+        android:text="@string/profile"
+        android:visibility="invisible"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_left_order"
+        android:layout_width="@dimen/dp_34"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_24"
+        android:layout_marginTop="22dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_left" />
+
+    <ImageView
+        android:id="@+id/image_checkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/text_profile"
+        app:layout_constraintStart_toStartOf="@+id/image_left_order"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_account" />
+
+    <TextView
+        android:id="@+id/text_btn_signin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/bg_btn_signin"
+        android:paddingLeft="93dp"
+        android:paddingTop="22dp"
+        android:paddingRight="93dp"
+        android:paddingBottom="22dp"
+        android:text="@string/signin"
+        android:textSize="19dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/image_checkout"
+        app:layout_constraintStart_toStartOf="@+id/image_checkout"
+        app:layout_constraintTop_toBottomOf="@+id/image_checkout" />
+
+    <TextView
+        android:id="@+id/text_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:text="@string/create"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/text_btn_signin"
+        app:layout_constraintStart_toStartOf="@+id/text_btn_signin"
+        app:layout_constraintTop_toBottomOf="@+id/text_btn_signin" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

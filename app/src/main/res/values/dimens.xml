@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="horizontal_spacing">14dp</dimen>
+    <dimen name="vertical_spacing">14dp</dimen>
+    <dimen name="dp_34">34dp</dimen>
+    <dimen name="dp_30">30dp</dimen>
+    <dimen name="dp_24">24dp</dimen>
+</resources>

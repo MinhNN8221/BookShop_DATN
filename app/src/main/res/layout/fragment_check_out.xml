@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.checkout.CheckOutFragment">
+
+    <TextView
+        android:id="@+id/text_checkout"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginEnd="@dimen/dp_24"
+        android:gravity="top"
+        android:text="@string/checkout"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_left"
+        android:layout_width="@dimen/dp_34"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_24"
+        android:layout_marginTop="22dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_left" />
+
+    <TextView
+        android:id="@+id/text_customer_infor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Thông tin người nhận"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/image_left"
+        app:layout_constraintTop_toBottomOf="@id/image_left" />
+
+    <TextView
+        android:id="@+id/id_receiverInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/image_left"
+        app:layout_constraintTop_toBottomOf="@id/text_customer_infor" />
+
+    <TextView
+        android:id="@+id/text_change_infor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Thay đổi"
+        android:textColor="@color/red"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@id/text_customer_infor"
+        app:layout_constraintEnd_toEndOf="@id/text_checkout"
+        app:layout_constraintTop_toTopOf="@id/text_customer_infor" />
+
+    <TextView
+        android:id="@+id/text_customer_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="@id/image_left"
+        app:layout_constraintTop_toBottomOf="@id/text_customer_infor" />
+
+    <TextView
+        android:id="@+id/text_cutomer_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="@id/image_left"
+        app:layout_constraintTop_toBottomOf="@id/text_customer_name" />
+
+    <TextView
+        android:id="@+id/text_cutomer_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="@id/text_checkout"
+        app:layout_constraintStart_toStartOf="@id/image_left"
+        app:layout_constraintTop_toBottomOf="@id/text_cutomer_phone" />
+
+    <TextView
+        android:id="@+id/text_product_infor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Thông tin sản phẩm"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/image_left"
+        app:layout_constraintTop_toBottomOf="@id/text_cutomer_address" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_cartItem"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@id/text_shippingType"
+        app:layout_constraintEnd_toEndOf="@id/text_checkout"
+        app:layout_constraintStart_toStartOf="@id/image_left"
+        app:layout_constraintTop_toBottomOf="@id/text_product_infor" />
+
+    <ImageView
+        android:id="@+id/img_transport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_truck"
+        app:layout_constraintBottom_toBottomOf="@id/text_shippingType"
+        app:layout_constraintStart_toStartOf="@id/image_left"
+        app:layout_constraintTop_toTopOf="@id/text_shippingType" />
+
+    <TextView
+        android:id="@+id/text_shippingType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:text="Phương thức vận chuyển"
+        android:textColor="@color/teal_200"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@id/radioGroup"
+        app:layout_constraintStart_toEndOf="@id/img_transport" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/text_payment_methods"
+        app:layout_constraintEnd_toEndOf="@id/text_checkout"
+        app:layout_constraintStart_toStartOf="@id/image_left">
+
+        <RadioButton
+            android:id="@+id/radiobtn_express"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Hỏa tốc"
+            android:textColor="@color/teal_200"
+            android:textSize="14dp" />
+
+        <RadioButton
+            android:id="@+id/radiobtn_fast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nhanh"
+            android:textColor="@color/teal_200"
+            android:textSize="14dp" />
+
+        <RadioButton
+            android:id="@+id/radiobtn_economical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tiết kiệm"
+            android:textColor="@color/teal_200"
+            android:textSize="14dp" />
+    </RadioGroup>
+
+    <ImageView
+        android:id="@+id/img_payment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_payment"
+        app:layout_constraintStart_toStartOf="@id/image_left"
+        app:layout_constraintTop_toTopOf="@id/text_payment_methods"
+        app:layout_constraintBottom_toBottomOf="@id/text_payment_methods"/>
+
+    <TextView
+        android:id="@+id/text_payment_methods"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Phương thức thanh toán"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:layout_marginStart="10dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/spinner_payment"
+        app:layout_constraintStart_toEndOf="@id/img_payment" />
+
+    <Spinner
+        android:id="@+id/spinner_payment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/text_checkout_product"
+        app:layout_constraintEnd_toEndOf="@id/text_checkout"
+        app:layout_constraintStart_toStartOf="@id/image_left" />
+
+    <ImageView
+        android:id="@+id/img_payment_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_payment_detail"
+        app:layout_constraintBottom_toBottomOf="@id/text_checkout_product"
+        app:layout_constraintStart_toStartOf="@id/image_left"
+        app:layout_constraintTop_toTopOf="@id/text_checkout_product" />
+
+    <TextView
+        android:id="@+id/text_checkout_product"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginBottom="5dp"
+        android:text="Thanh toán"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/text_total_product"
+        app:layout_constraintStart_toEndOf="@id/img_payment_detail" />
+
+    <TextView
+        android:id="@+id/text_total_product"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Tổng tiền sản phẩm"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@id/text_ship"
+        app:layout_constraintStart_toStartOf="@id/image_left" />
+
+    <TextView
+        android:id="@+id/text_total_price_product"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@id/text_ship_price"
+        app:layout_constraintEnd_toEndOf="@id/text_checkout" />
+
+    <TextView
+        android:id="@+id/text_ship"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Phí ship"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@id/text_promotion"
+        app:layout_constraintStart_toStartOf="@id/image_left" />
+
+    <TextView
+        android:id="@+id/text_ship_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@id/text_promotion_price"
+        app:layout_constraintEnd_toEndOf="@id/text_checkout" />
+
+    <TextView
+        android:id="@+id/text_promotion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Khuyến mãi"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@id/text_total"
+        app:layout_constraintStart_toStartOf="@id/image_left" />
+
+    <TextView
+        android:id="@+id/text_promotion_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@id/text_total_price"
+        app:layout_constraintEnd_toEndOf="@id/text_checkout" />
+
+    <TextView
+        android:id="@+id/text_total"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="Tổng tiền thanh toán"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/text_payment"
+        app:layout_constraintStart_toStartOf="@id/image_left" />
+
+    <TextView
+        android:id="@+id/text_total_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:textColor="@color/status"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/text_payment"
+        app:layout_constraintEnd_toEndOf="@id/text_checkout" />
+
+    <TextView
+        android:id="@+id/text_payment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/bg_btn_payment"
+        android:paddingLeft="28dp"
+        android:paddingTop="10dp"
+        android:paddingRight="28dp"
+        android:paddingBottom="10dp"
+        android:text="Thanh toán"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/text_checkout" />
+</androidx.constraintlayout.widget.ConstraintLayout>
