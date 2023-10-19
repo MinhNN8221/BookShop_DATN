@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 object MySharedPreferences {
-    private const val sharedPreferencesName = "myPreference"
+    private const val sharedPreferencesName = "myPreferences"
     private lateinit var sharedPreferences: SharedPreferences
     const val ACCESS_TOKEN = "access_token"
     const val KEY_PERMISSION_DENIED_COUNT = "KEY_PERMISSION_DENIED_COUNT"
