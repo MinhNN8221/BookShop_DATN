@@ -123,6 +123,7 @@ interface IDataSource {
         cartId: String,
         shippingId: Int,
         receiverId: Int,
+        paymentId: Int,
     ): Response<Message>
 
     suspend fun getReceiverInfo(receiverId: Int): Response<Receiver>

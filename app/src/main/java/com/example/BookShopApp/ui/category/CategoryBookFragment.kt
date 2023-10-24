@@ -45,7 +45,7 @@ class CategoryBookFragment : Fragment() {
     private val searchHandler = Handler(Looper.getMainLooper())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CategoryBookViewModel::class.java)
+        viewModel = ViewModelProvider(this)[CategoryBookViewModel::class.java]
     }
 
     override fun onCreateView(

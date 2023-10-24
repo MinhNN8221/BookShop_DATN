@@ -13,5 +13,6 @@ interface OrderRepository {
         cartId: String,
         shippingId: Int,
         receiverId: Int,
+        paymentId: Int,
     ): Response<Message>
 }

@@ -252,9 +252,10 @@ class RemoteDataSource() : IDataSource {
         cartId: String,
         shippingId: Int,
         receiverId: Int,
+        paymentId: Int,
     ): Response<Message> {
         return RetrofitClient.apiService.createOrder(
-            cartId, shippingId, receiverId
+            cartId, shippingId, receiverId, paymentId
         )
     }
 

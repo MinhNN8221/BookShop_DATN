@@ -158,15 +158,16 @@ class CheckOutFragment : Fragment() {
     }
 
     private fun paymentCash() {
-        createOrder()
+        createOrder(1)
     }
 
-    private fun createOrder() {
+    private fun createOrder(paymentId: Int) {
         val receiverId = binding?.idReceiverInfo?.text.toString().toInt()
         viewModelCheckOut.createOrder(
             cartId,
             shippingId,
-            receiverId
+            receiverId,
+            paymentId,
         )
     }
 
@@ -193,7 +194,7 @@ class CheckOutFragment : Fragment() {
                     transToken: String,
                     appTransID: String,
                 ) {
-                    createOrder()
+                    createOrder(2)
                     activity?.runOnUiThread {
                         AlertMessageViewer.showAlertZalopay(
                             requireContext(),

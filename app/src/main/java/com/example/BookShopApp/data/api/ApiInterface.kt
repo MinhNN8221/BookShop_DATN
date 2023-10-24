@@ -215,6 +215,7 @@ interface ApiInterface {
         @Field("cart_id") cartId: String,
         @Field("shipping_id") shippingId: Int,
         @Field("receiver_id") receiverId: Int,
+        @Field("payment_id") paymentId: Int,
     ): Response<Message>
 
     @GET("/receiver/{receiver_id}")

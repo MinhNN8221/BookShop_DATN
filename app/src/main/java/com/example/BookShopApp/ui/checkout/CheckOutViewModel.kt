@@ -23,13 +23,15 @@ class CheckOutViewModel : ViewModel() {
         cartId: String,
         shippingId: Int,
         receiverId: Int,
+        paymentId: Int,
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             val response =
                 orderRepository.createOrder(
                     cartId,
                     shippingId,
-                    receiverId
+                    receiverId,
+                    paymentId,
                 )
             if (response.isSuccessful == true) {
                 _message.postValue(response.body()?.let { MessageState(true, it) })

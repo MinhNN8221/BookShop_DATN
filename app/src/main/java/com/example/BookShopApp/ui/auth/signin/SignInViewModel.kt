@@ -26,7 +26,7 @@ class SignInViewModel : ViewModel() {
         if (user.isSignInFieldEmpty()) {
             _loginResponse.postValue(
                 AuthState(
-                    Error(message = "Fields cannot be empty!"),
+                    Error(message = "Các trường không được để trống!"),
                     null
                 )
             )
@@ -36,7 +36,7 @@ class SignInViewModel : ViewModel() {
         if (!user.isValidEmail()) {
             _loginResponse.postValue(
                 AuthState(
-                    Error(message = "Please enter a valid email address!"),
+                    Error(message = "Vui lòng nhập địa chỉ email của bạn!"),
                     null
                 )
             )
@@ -48,7 +48,7 @@ class SignInViewModel : ViewModel() {
                 AuthState(
                     Error(
                         message =
-                        "Password must be greater than 4 characters!"
+                        "Mật khẩu phải dài hơn 5 kí tự"
                     ),
                     null
                 )
@@ -65,7 +65,7 @@ class SignInViewModel : ViewModel() {
             if (response?.isSuccessful == true) {
                 _loginResponse.postValue(
                     AuthState(
-                        Error(message = "Login Successful!"),
+                        Error(message = "Đăng nhập thành công!"),
                         response.body()
                     )
                 )

@@ -19,11 +19,13 @@ class OrderRepositoryImp(private val dataSource: IDataSource) : OrderRepository 
         cartId: String,
         shippingId: Int,
         receiverId: Int,
+        paymentId: Int,
     ): Response<Message> {
         return dataSource.createOrder(
             cartId,
             shippingId,
-            receiverId
+            receiverId,
+            paymentId
         )
     }
 }

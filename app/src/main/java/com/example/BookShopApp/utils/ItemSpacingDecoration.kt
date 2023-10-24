@@ -21,5 +21,4 @@ class ItemSpacingDecoration(var horizontalSpacing: Int, var verticalSpacing: Int
             outRect.top = verticalSpacing
         }
     }
-
 }
