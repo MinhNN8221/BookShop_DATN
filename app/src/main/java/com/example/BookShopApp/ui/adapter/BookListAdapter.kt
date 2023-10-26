@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.BookShopApp.R
 import com.example.BookShopApp.data.model.CartItem
 import com.example.BookShopApp.data.model.Product
 import com.example.BookShopApp.databinding.ItemBookListBinding
@@ -112,12 +113,14 @@ class BookListAdapter : RecyclerView.Adapter<BookListAdapter.ViewHolder>() {
                     onItemClickListener?.onItemClick(position)
                 }
             }
-            binding.imageCart.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    addItemToCart?.onItemClick(position)
-                }
-            }
+//            binding.imageCart.setOnClickListener {
+//                val position = adapterPosition
+//                if (position != RecyclerView.NO_POSITION) {
+//                    addItemToCart?.onItemClick(position)
+//                }
+//            }
+            binding.textQuantitySold.text =
+                binding.root.resources.getString(R.string.sold) + " " + product.quantitySold
             binding.textQuantity.visibility = View.INVISIBLE
         }
 
@@ -132,7 +135,7 @@ class BookListAdapter : RecyclerView.Adapter<BookListAdapter.ViewHolder>() {
             binding.textPriceBook.text =
                 cartItem.price?.toDouble()
                     ?.let { formatMoney.formatMoney(it.toLong()) }
-            binding.imageCart.visibility = View.INVISIBLE
+            binding.textQuantitySold.visibility = View.INVISIBLE
         }
     }
 

@@ -29,6 +29,7 @@ import com.example.BookShopApp.ui.adapter.BookAdapter
 import com.example.BookShopApp.databinding.FragmentAuthorBinding
 import com.example.BookShopApp.ui.adapter.OnItemClickListener
 import com.example.BookShopApp.ui.productdetail.ProductdetailFragment
+import com.example.BookShopApp.utils.AlertMessageViewer
 import com.example.BookShopApp.utils.ItemSpacingDecoration
 
 class AuthorFragment : Fragment() {
@@ -41,6 +42,7 @@ class AuthorFragment : Fragment() {
     private var binding: FragmentAuthorBinding? = null
     private lateinit var adapter: BookAdapter
     private var bookList = mutableListOf<Product>()
+    private var authorId: Int? = 0
     private var currentPage = 1
     private var lastPosition = 0
     private var totalPosition = 0
@@ -72,7 +74,7 @@ class AuthorFragment : Fragment() {
         binding?.loadingLayout?.root?.visibility = View.VISIBLE
         initViewModel()
         navToProductDetail()
-        addItemToCart()
+//        addItemToCart()
         val horizontalSpacing =
             resources.getDimensionPixelSize(R.dimen.horizontal_spacing)
         val verticalSpacing =
@@ -227,16 +229,32 @@ class AuthorFragment : Fragment() {
         })
     }
 
-    private fun addItemToCart() {
-        adapter.setAddItemToCart(object : OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                val product = adapter.getBook(position)
-                viewModel.addItemToCart(product.product_id)
-                Toast.makeText(context, "Add item to cart successful", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        })
-    }
+//    private fun addItemToCart() {
+//        adapter.setAddItemToCart(object : OnItemClickListener {
+//            override fun onItemClick(position: Int) {
+//                val product = adapter.getBook(position)
+//                val quantityRemaining = product.quantity - product.quantitySold
+//                if (quantityRemaining > 0) {
+//                    viewModel.addItemToCart(product.product_id)
+////                    Handler().postDelayed({
+////                        val authorId = arguments?.getString("authorId")?.toInt()
+////                        authorId?.let {
+////                            viewModel.getProductsByAuthor(it, 10, 1, 100)
+////                        }
+////                    }, 500)
+//                    AlertMessageViewer.showAlertDialogMessage(
+//                        requireContext(),
+//                        "Đã thêm sản phẩm vào giỏ hàng"
+//                    )
+//                } else {
+//                    AlertMessageViewer.showAlertDialogMessage(
+//                        requireContext(),
+//                        "Sản phẩm này tạm hết!"
+//                    )
+//                }
+//            }
+//        })
+//    }
 
     private fun setAuthorName(authorDes: String, authorName: String): SpannableString {
         val content = SpannableString(authorDes)

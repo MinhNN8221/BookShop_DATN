@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -77,6 +78,9 @@ class WishlistFragment : Fragment() {
             }
             textAddToBag.setOnClickListener {
                 viewModel.addAllItemToCart()
+                Handler().postDelayed({
+                    viewModel.getWishList(10, 1, 100);
+                }, 500)
             }
             recyclerWishList.layoutManager = LinearLayoutManager(context)
             recyclerWishList.adapter = adapter
@@ -156,10 +160,22 @@ class WishlistFragment : Fragment() {
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val product = adapter.getBook(position)
-                viewModel.addItemToCart(product.product_id)
-                Toast.makeText(
-                    context, "Add item to cart successful", Toast.LENGTH_SHORT
-                ).show()
+                val quantityRemaining = product.quantity - product.quantitySold
+                if (quantityRemaining > 0) {
+                    viewModel.addItemToCart(product.product_id)
+                    Handler().postDelayed({
+                        viewModel.getWishList(10, 1, 100)
+                    }, 500)
+                    AlertMessageViewer.showAlertDialogMessage(
+                        requireContext(),
+                        "Đã thêm sản phẩm vào giỏ hàng"
+                    )
+                } else {
+                    AlertMessageViewer.showAlertDialogMessage(
+                        requireContext(),
+                        "Sản phẩm này tạm hết!"
+                    )
+                }
             }
         })
     }

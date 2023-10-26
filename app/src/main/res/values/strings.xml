@@ -65,7 +65,8 @@
     <string name="textTotal">Tổng tiền:</string>
     <string name="textStatus">Tình tạng đơn hàng:</string>
     <string name="language">Ngôn Ngữ: Tiếng Việt</string>
-    <string name="quantity">Số lượng : 10</string>
+    <string name="quantity">Số lượng còn lại</string>
+    <string name="sold">Đã bán</string>
     <string name="productId">Mã hàng:</string>
     <string name="readmore">Xem thêm.</string>
     <string name="price">Giá</string>

@@ -3,10 +3,12 @@ package com.example.BookShopApp.ui.productdetail
 import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.os.Handler
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +22,7 @@ import com.example.BookShopApp.databinding.FragmentProductDetailBinding
 import com.example.BookShopApp.ui.author.AuthorFragment
 import com.example.BookShopApp.ui.profile.ProfileFragment
 import com.example.BookShopApp.ui.publisher.PublisherFragment
+import com.example.BookShopApp.utils.AlertMessageViewer
 import com.example.BookShopApp.utils.format.FormatMoney
 import com.example.BookShopApp.utils.LoadingProgressBar
 import com.example.BookShopApp.utils.MySharedPreferences
@@ -77,10 +80,24 @@ class ProductdetailFragment : Fragment() {
                     .commit()
             }
             textAdditemtocart.setOnClickListener {
-                productId?.let { productId ->
-                    viewModel.addItemToCart(productId)
-                    Toast.makeText(context, "Add item to cart successful", Toast.LENGTH_SHORT)
-                        .show()
+                val str = textNum.text.toString().split(" ")
+                val quantityRemaining = str[str.size - 1].toInt()
+                if (quantityRemaining > 0) {
+                    productId?.let { productId ->
+                        viewModel.addItemToCart(productId)
+                        Handler().postDelayed({
+                            viewModel.getProductInfo(productId)
+                        }, 500)
+                        AlertMessageViewer.showAlertDialogMessage(
+                            requireContext(),
+                            "Đã thêm sản phẩm vào giỏ hàng!"
+                        )
+                    }
+                } else {
+                    AlertMessageViewer.showAlertDialogMessage(
+                        requireContext(),
+                        "Sản phẩm này tạm hết"
+                    )
                 }
             }
             imageFavorite.setOnClickListener {
@@ -135,6 +152,8 @@ class ProductdetailFragment : Fragment() {
                 .centerCrop()
                 .into(imagePro)
             textName.text = productInfoList.product.name
+            textNum.text =
+                resources.getString(R.string.quantity) + " " + (productInfoList.product.quantity - productInfoList.product.quantitySold)
             textMa.text =
                 resources.getString(R.string.productId) + " " + productInfoList.product.productId
             textDescription.text = productInfoList.product.description

@@ -88,6 +88,22 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="5dp"
+
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="NXB Trẻ"
+            android:textColor="@color/product_name"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toTopOf="@id/text_quantity_remaining"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_price" />
+
+        <TextView
+            android:id="@+id/text_quantity_remaining"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginBottom="22dp"
             android:ellipsize="end"
             android:maxLines="1"
@@ -97,7 +113,7 @@
             app:layout_constraintBottom_toBottomOf="@id/cardview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_name"
-            app:layout_constraintTop_toBottomOf="@+id/text_price" />
+            app:layout_constraintTop_toBottomOf="@+id/text_NXB" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
@@ -118,8 +134,8 @@
         android:background="@drawable/bg_delete_item"
         android:paddingLeft="23dp"
         android:paddingRight="23dp"
-        android:visibility="gone"
         android:src="@drawable/ic_delete"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/constraint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/constraint" />

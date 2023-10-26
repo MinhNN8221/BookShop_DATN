@@ -45,11 +45,9 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         val fragment: CheckOutFragment? =
-            supportFragmentManager.findFragmentById(R.id.container) as CheckOutFragment? // Thay R.id.fragment_container bằng ID của Fragment của bạn
-        Log.d("HELLO", "123${fragment}")
+            supportFragmentManager.findFragmentById(R.id.container) as CheckOutFragment?
         fragment?.let {
             intent?.let { it1 -> fragment.handleNewIntent(it1) }
-            Log.d("HELLO213", "dsf")
         }
     }
 }

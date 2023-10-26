@@ -32,7 +32,6 @@ class ProductdetailViewModel : ViewModel() {
     fun getProductInfo(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             val response = productRepository?.getProductInfo(id)
-            Log.d("HELLO", response?.body().toString())
             if (response?.isSuccessful == true) {
                 _productListInfo.postValue(response.body())
             } else {

@@ -24,6 +24,7 @@ import com.example.BookShopApp.databinding.FragmentCategoryBookBinding
 import com.example.BookShopApp.ui.adapter.BookAdapter
 import com.example.BookShopApp.ui.adapter.OnItemClickListener
 import com.example.BookShopApp.ui.productdetail.ProductdetailFragment
+import com.example.BookShopApp.utils.AlertMessageViewer
 import com.example.BookShopApp.utils.ItemSpacingDecoration
 
 class CategoryBookFragment : Fragment() {
@@ -175,15 +176,32 @@ class CategoryBookFragment : Fragment() {
         })
     }
 
-    private fun addItemToCart() {
-        adapter.setAddItemToCart(object : OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                val product = adapter.getBook(position)
-                viewModel.addItemToCart(product.product_id)
-                Toast.makeText(context, "Add item to cart successful", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
+//    private fun addItemToCart() {
+//        adapter.setAddItemToCart(object : OnItemClickListener {
+//            override fun onItemClick(position: Int) {
+//                val product = adapter.getBook(position)
+//                val quantityRemaining = product.quantity - product.quantitySold
+//                if (quantityRemaining > 0) {
+//                    viewModel.addItemToCart(product.product_id)
+////                    Handler().postDelayed({
+////                        val categoryId = arguments?.getString("categoryId")?.toInt()
+////                        categoryId?.let {
+////                            viewModel.getProductsInCategory(it, 10, currentPage, 100)
+////                        }
+////                    }, 500)
+//                    AlertMessageViewer.showAlertDialogMessage(
+//                        requireContext(),
+//                        "Đã thêm sản phẩm vào giỏ hàng"
+//                    )
+//                } else {
+//                    AlertMessageViewer.showAlertDialogMessage(
+//                        requireContext(),
+//                        "Sản phẩm này tạm hết!"
+//                    )
+//                }
+//            }
+//        })
+//    }
 
     private fun initViewModel() {
         viewModel.producList.observe(viewLifecycleOwner, Observer { state ->
@@ -206,7 +224,7 @@ class CategoryBookFragment : Fragment() {
                 }
                 adapter.setData(bookList)
                 navToProductDetail()
-                addItemToCart()
+//                addItemToCart()
                 binding?.loadingLayout?.root?.visibility = View.INVISIBLE
             }
         })

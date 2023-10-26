@@ -76,13 +76,18 @@ class WishListAdapter() : RecyclerView.Adapter<WishListAdapter.ViewHolder>() {
                     binding.textName.layoutParams as ViewGroup.MarginLayoutParams
                 val layoutParamsNXB =
                     binding.textNXB.layoutParams as ViewGroup.MarginLayoutParams
+                val layoutParamQuantity =
+                    binding.textQuantityRemaining.layoutParams as ViewGroup.MarginLayoutParams
                 val newMarginTopInDp = 12
                 val newMarginBottomDp = 12
                 binding.textDiscountPrice.visibility = View.VISIBLE
                 layoutParamsName.topMargin = dpToPx(binding.root, newMarginTopInDp)
-                layoutParamsNXB.bottomMargin = dpToPx(binding.root, newMarginBottomDp)
+//                layoutParamsNXB.topMargin = dpToPx(binding.root, newMarginTopInDp)
+//                layoutParamsNXB.bottomMargin = dpToPx(binding.root, newMarginBottomDp)
+                layoutParamQuantity.bottomMargin = dpToPx(binding.root, newMarginBottomDp)
                 binding.textName.layoutParams = layoutParamsName
                 binding.textNXB.layoutParams = layoutParamsNXB
+                binding.textQuantityRemaining.layoutParams = layoutParamQuantity
                 binding.textDiscountPrice.text =
                     wishList.discount.toDouble()
                         .let { formatMoney.formatMoney(it.toLong()) }
@@ -95,6 +100,9 @@ class WishListAdapter() : RecyclerView.Adapter<WishListAdapter.ViewHolder>() {
                     ?.let { formatMoney.formatMoney(it.toLong()) }
             }
             binding.textName.text = wishList.name
+            binding.textNXB.text = wishList.supplierName
+            binding.textQuantityRemaining.text =
+                (wishList.quantity - wishList.quantitySold).toString()
             binding.imageAdd.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {

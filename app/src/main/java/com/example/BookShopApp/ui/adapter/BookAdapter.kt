@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.BookShopApp.R
 import com.example.BookShopApp.data.model.response.product.BookInHome
 import com.example.BookShopApp.data.model.Product
 import com.example.BookShopApp.databinding.ItemBookBinding
@@ -98,12 +99,13 @@ class BookAdapter(private val isNewArrival: Boolean) :
 
     inner class BookViewHolder(private val binding: ItemBookBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(product: Product) {
             Glide.with(binding.root)
                 .load(product.thumbnail)
                 .centerCrop()
                 .into(binding.imageProduct)
-            if (product.discounted_price != null && product.discounted_price != product.price){
+            if (product.discounted_price != null && product.discounted_price != product.price) {
                 val layoutParams =
                     binding.textPrice.layoutParams as ViewGroup.MarginLayoutParams
                 val newMarginTopInDp = 0
@@ -129,12 +131,14 @@ class BookAdapter(private val isNewArrival: Boolean) :
                     onItemClickListener?.onItemClick(position)
                 }
             }
-            binding.imageCart.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    addItemToCart?.onItemClick(position)
-                }
-            }
+            binding.textQuantitySold.text =
+                binding.root.resources.getString(R.string.sold) + " " + product.quantitySold
+//            binding.imageCart.setOnClickListener {
+//                val position = adapterPosition
+//                if (position != RecyclerView.NO_POSITION) {
+//                    addItemToCart?.onItemClick(position)
+//                }
+//            }
         }
 
         fun bindBookHome(product: BookInHome) {
@@ -142,7 +146,7 @@ class BookAdapter(private val isNewArrival: Boolean) :
                 .load(product.thumbnail)
                 .centerCrop()
                 .into(binding.imageProduct)
-            if (product.discountedPrice != null && product.discountedPrice != product.price){
+            if (product.discountedPrice != null && product.discountedPrice != product.price) {
                 val layoutParams =
                     binding.textPrice.layoutParams as ViewGroup.MarginLayoutParams
                 val newMarginTopInDp = 0
@@ -166,7 +170,9 @@ class BookAdapter(private val isNewArrival: Boolean) :
                     onItemClickListener?.onItemClick(position)
                 }
             }
-            binding.imageCart.visibility = View.INVISIBLE
+//            binding.imageCart.visibility = View.INVISIBLE
+            binding.textQuantitySold.text =
+                binding.root.resources.getString(R.string.sold) + " " + product.quantitySold
             binding.textName.text = product.name
         }
     }
@@ -197,6 +203,8 @@ class BookAdapter(private val isNewArrival: Boolean) :
                     onItemClickListener?.onItemClick(position)
                 }
             }
+//            binding.textQuantitySold.text =
+//                binding.root.resources.getString(R.string.sold) + " " + product.quantitySold
         }
     }
 

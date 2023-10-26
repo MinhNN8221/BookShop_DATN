@@ -1,4 +1,5 @@
 package com.example.BookShopApp.data.model
+
 import com.google.gson.annotations.SerializedName
 
 data class Wishlist(
@@ -16,4 +17,5 @@ data class Wishlist(
     @SerializedName("quantitySold") var quantitySold: Int,
     @SerializedName("thumbnail")
     val thumbnail: String?,
+    @SerializedName("supplierName") var supplierName: String?,
 )

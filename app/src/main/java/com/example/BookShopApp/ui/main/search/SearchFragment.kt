@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -29,6 +30,7 @@ import com.example.BookShopApp.ui.adapter.BookAdapter
 import com.example.BookShopApp.ui.adapter.HistorySeachAdapter
 import com.example.BookShopApp.ui.adapter.OnItemClickListener
 import com.example.BookShopApp.ui.productdetail.ProductdetailFragment
+import com.example.BookShopApp.utils.AlertMessageViewer
 import com.example.BookShopApp.utils.ItemSpacingDecoration
 import com.example.BookShopApp.utils.MySharedPreferences
 
@@ -142,7 +144,7 @@ class SearchFragment : Fragment() {
                 }
                 adapter.setData(bookList)
                 binding?.loadingLayout?.root?.visibility = View.INVISIBLE
-                addItemToCart()
+//                addItemToCart()
                 navToProductDetail()
             }
         }
@@ -397,17 +399,37 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun addItemToCart() {
-        adapter.setAddItemToCart(object : OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                val product = adapter.getBook(position)
-                viewModel.addItemToCart(product.product_id)
-                Toast.makeText(
-                    context, "Add item to cart successful", Toast.LENGTH_SHORT
-                ).show()
-            }
-        })
-    }
+//    private fun addItemToCart() {
+//        adapter.setAddItemToCart(object : OnItemClickListener {
+//            override fun onItemClick(position: Int) {
+//                val product = adapter.getBook(position)
+//                val quantityRemaining = product.quantity - product.quantitySold
+//                if (quantityRemaining > 0) {
+//                    viewModel.addItemToCart(product.product_id)
+////                    Handler().postDelayed({
+////                        viewModel.getSearchProducts(
+////                            10,
+////                            currentPage,
+////                            100,
+////                            queryString,
+////                            filterType,
+////                            "asc"
+////                        )
+////                    }, 500)
+//                    AlertMessageViewer.showAlertDialogMessage(
+//                        requireContext(),
+//                        "Đã thêm sản phẩm vào giỏ hàng"
+//                    )
+//                } else {
+//                    AlertMessageViewer.showAlertDialogMessage(
+//                        requireContext(),
+//                        "Sản phẩm này tạm hết!"
+//                    )
+//                }
+////                refreshData()
+//            }
+//        })
+//    }
 
 
     private fun navToProductDetail() {
@@ -495,6 +517,18 @@ class SearchFragment : Fragment() {
                 )
             )
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getSearchProducts(
+            10,
+            1,
+            100,
+            queryString,
+            filterType,
+            "asc"
+        )
     }
 }
 
