@@ -83,6 +83,10 @@ class CheckOutFragment : Fragment() {
         viewModelCart.getAllCartItem()
         viewModelProfile.getCustomer()
         viewModelReceiver.getReceiverDefault()
+        val selected = arguments?.getString("selected")
+        selected?.let {
+            viewModelReceiver.getReceiverSelected()
+        }
 
         Handler().postDelayed({
             if (binding?.idReceiverInfo?.text.toString().isEmpty()) {
@@ -102,7 +106,7 @@ class CheckOutFragment : Fragment() {
                     }
                     .show()
             }
-        }, 350)
+        }, 500)
         val items =
             arrayOf("Thanh toán bằng MoMo", "Thanh toán bằng ZaloPay", "Thanh toán bằng tiền mặt")
 
@@ -118,7 +122,6 @@ class CheckOutFragment : Fragment() {
                     position: Int,
                     id: Long,
                 ) {
-                    Log.d("HELLO", id.toString())
                     idPayment = id
                 }
 
@@ -134,12 +137,6 @@ class CheckOutFragment : Fragment() {
                     .commit()
             }
             textPayment.setOnClickListener {
-//                val receiverId = idReceiverInfo.text.toString().toInt()
-//                viewModelCheckOut.createOrder(
-//                    cartId,
-//                    shippingId,
-//                    receiverId
-//                )
                 when (idPayment) {
                     1L -> paymentZalopay()
                     2L -> paymentCash()
@@ -150,7 +147,7 @@ class CheckOutFragment : Fragment() {
             }
             imageLeft.setOnClickListener {
                 parentFragmentManager.popBackStack()
-
+                viewModelReceiver.updateReceiverDefaultIsSelected()
             }
             recyclerCartItem.layoutManager = LinearLayoutManager(context)
             recyclerCartItem.adapter = adapter
@@ -159,6 +156,7 @@ class CheckOutFragment : Fragment() {
 
     private fun paymentCash() {
         createOrder(1)
+        loadingProgressBar.show()
     }
 
     private fun createOrder(paymentId: Int) {
@@ -178,7 +176,9 @@ class CheckOutFragment : Fragment() {
             val amount = binding?.textTotalPrice?.text?.replace(Regex("\\D"), "")
             val data = orderApi.createOrder(amount.toString())
             val code = data?.getString("return_code")
-            Toast.makeText(requireContext(), "return_code: $code", Toast.LENGTH_LONG).show()
+//            Toast.makeText(requireContext(), "return_code: $code", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "Chuyển sang ứng dụng zalopay", Toast.LENGTH_SHORT)
+                .show()
             if (code == "1") {
                 token = data.getString("zp_trans_token")
             }

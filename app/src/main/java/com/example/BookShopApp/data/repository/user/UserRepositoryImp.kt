@@ -59,24 +59,4 @@ class UserRepositoryImp(private val dataSource: IDataSource) : UserRepository {
     override suspend fun changeAvatar(image: MultipartBody.Part): Response<Customer>? {
         return dataSource.changeAvatar(image)
     }
-
-    override suspend fun getReceiverInfo(receiverId: Int): Response<Receiver> {
-        return dataSource.getReceiverInfo(receiverId)
-    }
-
-    override suspend fun addReceiverInfo(
-        receiverName: String,
-        receiverPhone: String,
-        receiverAddress: String,
-    ): Response<Message> {
-        return dataSource.addReceiverInfo(receiverName, receiverPhone, receiverAddress)
-    }
-
-    override suspend fun getReceiverDefault(): Response<Receiver> {
-        return dataSource.getReceiverDefault()
-    }
-
-    override suspend fun getReceivers(): Response<ReceiverResponse> {
-        return dataSource.getReceivers()
-    }
 }

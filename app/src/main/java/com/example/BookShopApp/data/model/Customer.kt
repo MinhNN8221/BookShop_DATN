@@ -28,5 +28,7 @@ data class Customer(
     var dateOfBirth: String? = null,
     @SerializedName("avatar")
     var avatar: String? = null,
+    @SerializedName("status")
+    var status: String? = null,
 )
 

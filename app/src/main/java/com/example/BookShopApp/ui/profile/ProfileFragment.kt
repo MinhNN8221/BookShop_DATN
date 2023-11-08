@@ -102,7 +102,7 @@ class ProfileFragment : Fragment() {
                     .replace(R.id.container, fragmentChangePass.apply { arguments = bundle })
                     .addToBackStack("profile").commit()
             }
-            linearOrderInfor.setOnClickListener {
+            linearReceiverAddress.setOnClickListener {
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.container, ReceiverInfoFragment()).addToBackStack("profile")
                     .commit()
@@ -122,7 +122,7 @@ class ProfileFragment : Fragment() {
                 Glide.with(root).load(imgAvatar).centerCrop().into(imageAvatar)
             }
         } else {
-            if (profile.avatar == "") {
+            if (profile.avatar == null) {
                 binding?.imageAvatar?.setImageResource(R.drawable.account_profile)
             } else {
                 binding?.apply {

@@ -32,7 +32,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/image_profile"
         app:layout_constraintStart_toStartOf="@id/text_home"
@@ -42,16 +42,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/text_new_community"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:text="New and Community"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+<!--            <TextView-->
+<!--                android:id="@+id/text_new_community"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:text="New and Community"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="20dp"-->
+<!--                android:textStyle="bold"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardview"
@@ -61,12 +61,13 @@
                 app:cardCornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_new_community">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewpager_banner"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
+                    android:background="@color/background"
                     app:layout_constraintDimensionRatio="w, 1:2" />
 
                 <me.relex.circleindicator.CircleIndicator3

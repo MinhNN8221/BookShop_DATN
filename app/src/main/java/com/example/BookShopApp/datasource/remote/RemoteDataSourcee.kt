@@ -11,6 +11,7 @@ import com.example.BookShopApp.data.model.response.product.*
 import com.example.BookShopApp.datasource.IDataSource
 import okhttp3.MultipartBody
 import retrofit2.Response
+import retrofit2.http.Field
 
 class RemoteDataSource() : IDataSource {
 
@@ -267,11 +268,31 @@ class RemoteDataSource() : IDataSource {
         receiverName: String,
         receiverPhone: String,
         receiverAddress: String,
+        isDefault: Int,
     ): Response<Message> {
         return RetrofitClient.apiService.addReceiverInfo(
             receiverName,
             receiverPhone,
-            receiverAddress
+            receiverAddress,
+            isDefault,
+        )
+    }
+
+    override suspend fun updateReceiverInfo(
+        receiverName: String,
+        receiverPhone: String,
+        receiverAddress: String,
+        receiverId: Int,
+        isDefault: Int,
+        isSelected:Int,
+    ): Response<Message> {
+        return RetrofitClient.apiService.updateReceiverInfo(
+            receiverName,
+            receiverPhone,
+            receiverAddress,
+            receiverId,
+            isDefault,
+            isSelected,
         )
     }
 
@@ -279,7 +300,18 @@ class RemoteDataSource() : IDataSource {
         return RetrofitClient.apiService.getReceiverDefault()
     }
 
+    override suspend fun getReceiverSelected(): Response<Receiver> {
+        return RetrofitClient.apiService.getReceiverSelected()
+    }
+
     override suspend fun getReceivers(): Response<ReceiverResponse> {
         return RetrofitClient.apiService.getReceivers()
+    }
+
+    override suspend fun updateReceiverDefaultIsSelected(): Response<Message> {
+        return RetrofitClient.apiService.updateReceiverDefaultIsSelected()
+    }
+    override suspend fun removeReceiver(receiverId: Int): Response<Message> {
+        return RetrofitClient.apiService.removeReceiver(receiverId)
     }
 }

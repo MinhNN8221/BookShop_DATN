@@ -51,10 +51,10 @@ class WishlistViewModel : ViewModel() {
             if (response?.isSuccessful==true){
                 _message.postValue(response.body())
             }else{
-                val erroBody=response?.errorBody()?.string()
+                val errorBody=response?.errorBody()?.string()
                 val gson=Gson()
-                val erroResponse=gson.fromJson(erroBody, ErrorResponse::class.java)
-                _message.postValue(Message(erroResponse.error.message))
+                val errorResponse=gson.fromJson(errorBody, ErrorResponse::class.java)
+                _message.postValue(Message(errorResponse.error.message))
             }
         }
     }

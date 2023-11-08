@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -63,9 +64,6 @@ class SignInFragment : Fragment() {
             val loginTime = System.currentTimeMillis()
             navToMainScreen()
             RetrofitClient.updateAccessToken(accessToken)
-//            Log.d("LoginTimeFIRST", loginTimeFirst.toString())
-//            Log.d("LoginTIME", loginTime.toString())
-//            Log.d("LoginTime", (loginTime - loginTimeFirst).toString())
             if ((loginTime - loginTimeFirst) > expiresIn) {
                 MySharedPreferences.clearPreferences()
                 parentFragmentManager.beginTransaction()
@@ -147,6 +145,11 @@ class SignInFragment : Fragment() {
                         it1
                     )
                 }
+            } else if (it?.loginResponse.customer.status.equals("inactive")) {
+                AlertMessageViewer.showAlertDialogMessage(
+                    requireContext(),
+                    "Tài khoản của bạn đã bị khóa!"
+                )
             } else {
                 navToMainScreen()
                 MySharedPreferences.putAccessToken(it.loginResponse.accessToken)

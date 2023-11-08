@@ -20,6 +20,7 @@ import com.example.BookShopApp.R
 import com.example.BookShopApp.data.model.response.product.ProductInfoList
 import com.example.BookShopApp.databinding.FragmentProductDetailBinding
 import com.example.BookShopApp.ui.author.AuthorFragment
+import com.example.BookShopApp.ui.main.wishlist.WishlistViewModel
 import com.example.BookShopApp.ui.profile.ProfileFragment
 import com.example.BookShopApp.ui.publisher.PublisherFragment
 import com.example.BookShopApp.utils.AlertMessageViewer
@@ -30,10 +31,12 @@ import com.example.BookShopApp.utils.MySharedPreferences
 class ProductdetailFragment : Fragment() {
     private var binding: FragmentProductDetailBinding? = null
     private lateinit var viewModel: ProductdetailViewModel
+    private lateinit var viewModelWishList: WishlistViewModel
     private var wishlist: Int = 0
     private val formatMoney = FormatMoney()
     private var authorId = 0
     private var publisherId = 0
+    private var sizeWishList = 0
     private lateinit var loadingProgressBar: LoadingProgressBar
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +48,8 @@ class ProductdetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProductdetailViewModel::class.java)
+        viewModel = ViewModelProvider(this)[ProductdetailViewModel::class.java]
+        viewModelWishList = ViewModelProvider(this)[WishlistViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,6 +57,7 @@ class ProductdetailFragment : Fragment() {
         initViewModel()
         loadingProgressBar = LoadingProgressBar(requireContext())
         loadingProgressBar.show()
+        viewModelWishList.getWishList(10, 1, 100)
         val productId = arguments?.getString("bookId")?.toInt()
         productId?.let {
             viewModel.getProductInfo(it)
@@ -123,17 +128,28 @@ class ProductdetailFragment : Fragment() {
                 publisherId = it.supplier.supplier_id
             }
         }
+        viewModelWishList.wishList.observe(viewLifecycleOwner) { wishlist ->
+            sizeWishList = wishlist.wishlist.size
+            Log.d("Size", wishlist.wishlist.toString())
+        }
     }
 
     private fun itemWishList(productId: Int) {
         MySharedPreferences.putInt("productId", productId)
         if (wishlist == 0) {
-            viewModel.addItemToWishList(productId)
-            wishlist = 1
-            Toast.makeText(context, "Đã thêm vào wishlist của bạn!", Toast.LENGTH_SHORT).show()
-            MySharedPreferences.putInt("wishlist", 1)
-            binding?.imageFavorite?.setImageResource(R.drawable.ic_favorite)
-            binding?.imageFavorite?.setBackgroundResource(R.drawable.bg_ellipse_favor)
+            if (sizeWishList >= 10) {
+                AlertMessageViewer.showAlertDialogMessage(
+                    requireContext(),
+                    "Chỉ lưu được 10 sản phẩm trong wishlist"
+                )
+            } else {
+                viewModel.addItemToWishList(productId)
+                wishlist = 1
+                Toast.makeText(context, "Đã thêm vào wishlist của bạn!", Toast.LENGTH_SHORT).show()
+                MySharedPreferences.putInt("wishlist", 1)
+                binding?.imageFavorite?.setImageResource(R.drawable.ic_favorite)
+                binding?.imageFavorite?.setBackgroundResource(R.drawable.bg_ellipse_favor)
+            }
         } else {
             viewModel.removeItemInWishList(productId)
             wishlist = 0
@@ -193,16 +209,16 @@ class ProductdetailFragment : Fragment() {
             val layoutParams = constraintImageProduct.layoutParams as ConstraintLayout.LayoutParams
             readmore.setOnClickListener {
                 if (check) {
-                    layoutParams.dimensionRatio = "12:7"
+                    layoutParams.dimensionRatio = "3:2"
                     constraintImageProduct.layoutParams = layoutParams
                     val newMaxLines = Integer.MAX_VALUE
                     textDescription.maxLines = newMaxLines
                     check = false
                     readmore.text = "Collapse."
                 } else {
-                    layoutParams.dimensionRatio = "6:4"
+                    layoutParams.dimensionRatio = "6:5"
                     constraintImageProduct.layoutParams = layoutParams
-                    val newMaxLines = 2
+                    val newMaxLines = 3
                     textDescription.maxLines = newMaxLines
                     readmore.text = "Read more."
                     check = true

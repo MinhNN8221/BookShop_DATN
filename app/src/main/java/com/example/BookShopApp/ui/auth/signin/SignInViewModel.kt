@@ -5,10 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.BookShopApp.data.model.Customer
 import com.example.BookShopApp.data.model.response.auth.AuthResponse
 import com.example.BookShopApp.data.model.response.auth.AuthState
 import com.example.BookShopApp.data.model.response.Error
 import com.example.BookShopApp.data.model.response.ErrorResponse
+import com.example.BookShopApp.data.repository.search.historysearch.HistorySearchRepository
+import com.example.BookShopApp.data.repository.search.historysearch.HistorySearchRepositoryImp
 import com.example.BookShopApp.data.repository.user.UserRepository
 import com.example.BookShopApp.data.repository.user.UserRepositoryImp
 import com.example.BookShopApp.datasource.remote.RemoteDataSource
@@ -20,6 +23,9 @@ class SignInViewModel : ViewModel() {
     // TODO: Implement the ViewModel
     private var _loginResponse = MutableLiveData<AuthState>()
     val loginResponse: LiveData<AuthState> get() = _loginResponse
+    private val _customer = MutableLiveData<Customer>()
+    val customer: LiveData<Customer> get() = _customer
+    private var userRepository: UserRepository? = UserRepositoryImp(RemoteDataSource())
     private val authRepository: UserRepository = UserRepositoryImp(RemoteDataSource())
     fun checkFields(user: AuthResponse) {
 
@@ -84,4 +90,14 @@ class SignInViewModel : ViewModel() {
         }
     }
 
+    fun getCustomer() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = userRepository?.getCustomer()
+            if (response?.isSuccessful == true) {
+                _customer.postValue(response.body())
+            } else {
+                Log.d("getProfile", "NULLLL")
+            }
+        }
+    }
 }

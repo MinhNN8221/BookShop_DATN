@@ -2,10 +2,14 @@ package com.example.BookShopApp.ui.profile.receiver.receiverinfo
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
+import android.widget.Toast
+import com.example.BookShopApp.R
 import com.example.BookShopApp.data.model.Receiver
 import com.example.BookShopApp.databinding.FragmentReceiverInfoBinding
 import com.example.BookShopApp.utils.AlertMessageViewer
@@ -32,17 +36,48 @@ class ReceiverInfoFragment : Fragment() {
         viewModel = ViewModelProvider(this)[ReceiverInfoViewModel::class.java]
         initViewModel()
 //        viewModel.getCustomer()
+        val receiver = arguments?.getSerializable("receiver") as Receiver?
+        receiver?.let {
+            bindData(it)
+            binding?.textUpdate?.text = resources.getString(R.string.update)
+            binding?.textAddressInfo?.text="Địa chỉ"
+        }
         binding?.apply {
+            switchAddressDefalut.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (!isChecked) {
+                    AlertMessageViewer.showAlertDialogMessage(
+                        requireContext(),
+                        "Để hủy địa chỉ mặc định này cần thêm địa chỉ khác làm địa chỉ mặc đinh!"
+                    )
+                    switchAddressDefalut.isChecked = true
+                }
+            }
             textUpdate.setOnClickListener {
                 val name = editFullname.text.toString()
                 val address = editAddress.text.toString()
                 val mobPhone = editPhoneNumber.text.toString()
-                val receiverInfo = Receiver(
-                    receiverName = name,
-                    receiverPhone = mobPhone,
-                    receiverAddress = address
-                )
-                viewModel.checkFields(receiverInfo)
+                var isDefault=0;
+                if(switchAddressDefalut.isChecked)
+                    isDefault = 1
+                if (receiver == null) {
+                    val receiverInfo = Receiver(
+                        receiverName = name,
+                        receiverPhone = mobPhone,
+                        receiverAddress = address,
+                        isDefault = isDefault
+                    )
+                    viewModel.checkFields(receiverInfo, false)
+                } else {
+                    val receiverInfo = Receiver(
+                        receiverId = receiver?.receiverId,
+                        receiverName = name,
+                        receiverPhone = mobPhone,
+                        receiverAddress = address,
+                        isDefault = isDefault,
+                        isSelected = receiver?.isSelected
+                    )
+                    viewModel.checkFields(receiverInfo, true)
+                }
             }
             imageLeft.setOnClickListener {
                 parentFragmentManager.popBackStack()
@@ -64,5 +99,18 @@ class ReceiverInfoFragment : Fragment() {
 //            }
 //            loadingProgressBar.cancel()
 //        }
+    }
+
+    private fun bindData(receiver: Receiver?) {
+        binding?.apply {
+            receiver?.let {
+                editFullname.setText(it.receiverName)
+                editAddress.setText(it.receiverAddress)
+                editPhoneNumber.setText(it.receiverPhone)
+                if (it.isDefault == 1) {
+                    switchAddressDefalut.isChecked = true
+                }
+            }
+        }
     }
 }

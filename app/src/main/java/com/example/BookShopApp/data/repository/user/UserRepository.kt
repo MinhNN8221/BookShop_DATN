@@ -33,16 +33,4 @@ interface UserRepository {
     ): Response<Customer>?
 
     suspend fun changeAvatar(image: MultipartBody.Part): Response<Customer>?
-
-    suspend fun getReceiverInfo(receiverId: Int): Response<Receiver>
-
-    suspend fun getReceiverDefault(): Response<Receiver>
-
-    suspend fun addReceiverInfo(
-        receiverName: String,
-        receiverPhone: String,
-        receiverAddress: String,
-    ): Response<Message>
-
-    suspend fun getReceivers(): Response<ReceiverResponse>
 }

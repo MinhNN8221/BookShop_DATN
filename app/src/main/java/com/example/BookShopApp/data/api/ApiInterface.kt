@@ -33,7 +33,7 @@ interface ApiInterface {
         @Field("password") password: String,
     ): Response<AuthResponse>
 
-    @GET("products/recommend")
+    @GET("products/banner")
     suspend fun getProductBanner(): Response<BannerList>
 
     @GET("products")
@@ -222,16 +222,37 @@ interface ApiInterface {
     suspend fun getReceiverInfo(@Path("receiver_id") receiverId: Int): Response<Receiver>
 
     @FormUrlEncoded
+    @PUT("/receiver")
+    suspend fun updateReceiverInfo(
+        @Field("receiver_name") receiverName: String,
+        @Field("receiver_phone") receiverPhone: String,
+        @Field("receiver_address") receiverAddress: String,
+        @Field("receiverId") receiverId: Int,
+        @Field("isDefault") isDefault: Int,
+        @Field("isSelected") isSelected: Int,
+    ): Response<Message>
+
+    @FormUrlEncoded
     @POST("/receiver")
     suspend fun addReceiverInfo(
         @Field("receiver_name") receiverName: String,
         @Field("receiver_phone") receiverPhone: String,
         @Field("receiver_address") receiverAddress: String,
+        @Field("isDefault") isDefault: Int,
     ): Response<Message>
+
+    @PUT("/receiver/defaultIsSelected")
+    suspend fun updateReceiverDefaultIsSelected(): Response<Message>
 
     @GET("/receiver/default")
     suspend fun getReceiverDefault(): Response<Receiver>
 
+    @GET("/receiver/selected")
+    suspend fun getReceiverSelected(): Response<Receiver>
+
     @GET("/receiver")
     suspend fun getReceivers(): Response<ReceiverResponse>
+
+    @DELETE("/receiver")
+    suspend fun removeReceiver(@Query("receiverId") receiverId: Int): Response<Message>
 }

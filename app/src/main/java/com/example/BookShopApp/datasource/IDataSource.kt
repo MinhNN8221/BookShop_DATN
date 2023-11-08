@@ -131,8 +131,21 @@ interface IDataSource {
         receiverName: String,
         receiverPhone: String,
         receiverAddress: String,
+        isDefault: Int,
+    ): Response<Message>
+
+    suspend fun updateReceiverInfo(
+        receiverName: String,
+        receiverPhone: String,
+        receiverAddress: String,
+        receiverId: Int,
+        isDefault: Int,
+        isSelected: Int,
     ): Response<Message>
 
     suspend fun getReceiverDefault(): Response<Receiver>
+    suspend fun getReceiverSelected(): Response<Receiver>
     suspend fun getReceivers(): Response<ReceiverResponse>
+    suspend fun updateReceiverDefaultIsSelected(): Response<Message>
+    suspend fun removeReceiver(receiverId: Int): Response<Message>
 }

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.BookShopApp.databinding.ActivityMainBinding
 import com.example.BookShopApp.ui.auth.signin.SignInFragment
 import com.example.BookShopApp.ui.checkout.CheckOutFragment
+import com.example.BookShopApp.ui.main.cart.CartFragment
 import com.example.BookShopApp.ui.onboarding.OnboardingFragment
 import com.example.BookShopApp.utils.MySharedPreferences
 

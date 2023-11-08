@@ -11,7 +11,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
 <!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@color/darkgray</item>
         <!-- Customize your theme here. -->
         <item name="android:textColorHint">@color/primary</item>
         <item name="android:editTextColor">@color/primary</item>

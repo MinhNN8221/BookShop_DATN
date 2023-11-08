@@ -7,6 +7,8 @@ data class CartItem(
     @SerializedName("name") var name: String? = null,
     @SerializedName("price") var price: String ?= null,
     @SerializedName("quantity") var quantity: Int,
+    @SerializedName("quantityBook") var quantityBook: Int,
+    @SerializedName("quantitySold") var quantitySold: Int,
     @SerializedName("product_id") var productId: Int? = null,
     @SerializedName("sub_total") var subTotal: String = "",
     @SerializedName("added_on") var addedOn: String? = null,

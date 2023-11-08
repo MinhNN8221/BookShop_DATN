@@ -226,7 +226,7 @@ class UpdateProfileFragment : Fragment() {
                     .into(imageAvatar)
             }
         } else {
-            if (profile.avatar == "") {
+            if (profile.avatar == null) {
                 binding?.imageAvatar?.setImageResource(R.drawable.account_profile)
             } else {
                 binding?.apply {

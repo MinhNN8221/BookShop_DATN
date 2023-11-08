@@ -3,23 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/contraint_receiver"
     android:background="@color/white">
 
     <RadioButton
         android:id="@+id/radio_button"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="17dp"
+        android:layout_width="35dp"
+        android:layout_height="37dp"
         android:layout_marginStart="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/text_receiver_name"
+        app:layout_constraintTop_toTopOf="@id/text_receiver_name" />
 
     <TextView
         android:id="@+id/id_receiver"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@id/text_update"
+        app:layout_constraintEnd_toStartOf="@id/text_remove"
         app:layout_constraintStart_toEndOf="@id/radio_button"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,13 +28,13 @@
         android:id="@+id/text_receiver_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
         android:text="sfsfsdfds"
         android:textColor="@color/black"
         android:textSize="25dp"
         android:layout_marginStart="5dp"
-        app:layout_constraintEnd_toStartOf="@id/text_update"
+        app:layout_constraintEnd_toStartOf="@id/text_remove"
         app:layout_constraintStart_toEndOf="@id/radio_button"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +42,7 @@
         android:id="@+id/text_receiver_phone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:text="sfdsfdsf"
         android:textColor="@color/gray"
         android:textSize="15dp"
@@ -65,7 +66,7 @@
         android:id="@+id/text_default"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:background="@drawable/bg_receiver_default"
         android:padding="3dp"
         android:text="Mặc định"
@@ -79,20 +80,21 @@
         android:id="@+id/view_line"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:background="@color/line"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/text_remove"
         app:layout_constraintStart_toStartOf="@id/text_receiver_name"
         app:layout_constraintTop_toBottomOf="@id/text_default" />
 
     <TextView
-        android:id="@+id/text_update"
+        android:id="@+id/text_remove"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:text="Sửa"
-        android:textColor="@color/teal_200"
-        android:textSize="17dp"
+        android:layout_marginEnd="17dp"
+        android:text="Xóa"
+        android:textColor="@color/red"
+        android:padding="7dp"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="@id/text_receiver_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/text_receiver_name" />

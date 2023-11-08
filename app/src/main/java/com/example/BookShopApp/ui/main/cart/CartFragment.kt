@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,6 @@ import com.example.BookShopApp.databinding.FragmentCartBinding
 import com.example.BookShopApp.ui.adapter.CartAdapter
 import com.example.BookShopApp.ui.adapter.OnItemClickListener
 import com.example.BookShopApp.ui.checkout.CheckOutFragment
-import com.example.BookShopApp.ui.checkout.CheckoutActivity
 import com.example.BookShopApp.ui.profile.ProfileFragment
 import com.example.BookShopApp.utils.AlertMessageViewer
 import com.example.BookShopApp.utils.format.FormatMoney
@@ -96,10 +96,6 @@ class CartFragment : Fragment() {
                         parentFragmentManager.beginTransaction()
                             .replace(R.id.container, CheckOutFragment(), "CartFragment")
                             .addToBackStack("Cart").commit()
-
-
-//                        val intent= Intent(activity, CheckoutActivity::class.java)
-//                        startActivity(intent)
                     }
                 }
             }
@@ -121,7 +117,8 @@ class CartFragment : Fragment() {
                 if (quantity > 0) {
                     itemId?.let { viewModel.changeProductQuantityInCart(it, quantity) }
                     adapter.setSubTotalPrice(subTotalPrice, position)
-                    adapter.setProductQuantity(quantity, position)
+                    adapter.setQuantity(quantity, position)
+                    adapter.setQuantityBook(1, position)
                     binding?.textPrice?.text =
                         formatMoney.formatMoney((adapter.getTotalPrice()).toLong())
                 } else {
@@ -132,7 +129,7 @@ class CartFragment : Fragment() {
                         .setPositiveButton("Đồng ý") { dialog, _ ->
                             itemId?.let { viewModel.removeItemInCart(it) }
                             adapter.setSubTotalPrice(subTotalPrice, position)
-                            adapter.setProductQuantity(quantity, position)
+                            adapter.setQuantity(quantity, position)
                             adapter.removeData(position)
                             binding?.textPrice?.text =
                                 formatMoney.formatMoney((adapter.getTotalPrice()).toLong())
@@ -153,33 +150,29 @@ class CartFragment : Fragment() {
         adapter.setOnIncreClickListener(object : OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val cartItem = adapter.getItemCart(position)
-                val itemId = cartItem.itemId
-                val quantity = cartItem.quantity + 1
-                val subTotalPrice =
-                    cartItem.subTotal.toDouble() + (cartItem.discountedPrice?.toDouble() ?: 0.0)
-                adapter.setSubTotalPrice(subTotalPrice, position)
-                adapter.setProductQuantity(quantity, position)
-                itemId?.let { viewModel.changeProductQuantityInCart(it, quantity) }
-                binding?.textPrice?.text =
-                    formatMoney.formatMoney((adapter.getTotalPrice()).toLong())
+                if (adapter.getQuantityBook(position) - adapter.getQuantitySold(position) > 0) {
+                    val itemId = cartItem.itemId
+                    val quantity = cartItem.quantity + 1
+                    val subTotalPrice =
+                        cartItem.subTotal.toDouble() + (cartItem.discountedPrice?.toDouble() ?: 0.0)
+                    adapter.setSubTotalPrice(subTotalPrice, position)
+                    adapter.setQuantity(quantity, position)
+                    adapter.setQuantityBook(-1, position)
+                    itemId?.let { viewModel.changeProductQuantityInCart(it, quantity) }
+                    binding?.textPrice?.text =
+                        formatMoney.formatMoney((adapter.getTotalPrice()).toLong())
+                } else {
+                    AlertMessageViewer.showAlertDialogMessage(
+                        requireContext(),
+                        "Sản phẩm này tạm hết!"
+                    )
+                }
             }
         })
     }
 
-    override fun onHiddenChanged(hidden: Boolean) {
-        super.onHiddenChanged(hidden)
-        if (!hidden) {
-            Toast.makeText(requireContext(), "Fragment is visible again", Toast.LENGTH_SHORT).show()
-            viewModel.getAllCartItem()
-        }
-    }
-
     override fun onResume() {
         super.onResume()
-        viewModel.getAllCartItem()
-    }
-
-    fun refreshCartData() {
         viewModel.getAllCartItem()
     }
 }

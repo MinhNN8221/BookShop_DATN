@@ -40,9 +40,21 @@ class CartAdapter() : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setProductQuantity(quantity: Int, position: Int) {
+    fun setQuantity(quantity: Int, position: Int) {
         cartItemList[position].quantity = quantity
         notifyDataSetChanged()
+    }
+
+    fun setQuantityBook(quantityBook: Int, position: Int) {
+//        cartItemList[position].quantityBook += quantityBook
+        cartItemList[position].quantitySold -= quantityBook
+    }
+
+    fun getQuantityBook(position: Int):Int {
+        return cartItemList[position].quantityBook
+    }
+    fun getQuantitySold(position: Int):Int {
+        return cartItemList[position].quantitySold
     }
 
     @SuppressLint("NotifyDataSetChanged")
