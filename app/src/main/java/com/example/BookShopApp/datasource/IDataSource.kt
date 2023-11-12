@@ -126,6 +126,7 @@ interface IDataSource {
         paymentId: Int,
     ): Response<Message>
 
+    suspend fun updateOrderStatus(orderId: Int, orderStatusId: Int): Response<Message>
     suspend fun getReceiverInfo(receiverId: Int): Response<Receiver>
     suspend fun addReceiverInfo(
         receiverName: String,

@@ -44,7 +44,7 @@ class CreateOrder {
             .add("app_user", input.AppUser)
             .add("app_time", input.AppTime)
             .add("amount", input.Amount)
-            .add("app_trans_id", input.AppTransId)
+            .add("app_trans_id", input.AppTransId)  //Mã app_trans_id của giao dịch
             .add("embed_data", input.EmbedData)
             .add("item", input.Items)
             .add("bank_code", input.BankCode)

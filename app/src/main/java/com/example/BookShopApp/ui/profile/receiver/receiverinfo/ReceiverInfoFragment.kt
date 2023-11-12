@@ -44,7 +44,7 @@ class ReceiverInfoFragment : Fragment() {
         }
         binding?.apply {
             switchAddressDefalut.setOnCheckedChangeListener { buttonView, isChecked ->
-                if (!isChecked) {
+                if(receiver?.isSelected==1) {
                     AlertMessageViewer.showAlertDialogMessage(
                         requireContext(),
                         "Để hủy địa chỉ mặc định này cần thêm địa chỉ khác làm địa chỉ mặc đinh!"
@@ -78,6 +78,7 @@ class ReceiverInfoFragment : Fragment() {
                     )
                     viewModel.checkFields(receiverInfo, true)
                 }
+                parentFragmentManager.popBackStack()
             }
             imageLeft.setOnClickListener {
                 parentFragmentManager.popBackStack()

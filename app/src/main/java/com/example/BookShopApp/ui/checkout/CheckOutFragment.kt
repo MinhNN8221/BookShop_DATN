@@ -61,7 +61,7 @@ class CheckOutFragment : Fragment() {
         val policy = ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
         // ZaloPay SDK Init
-        ZaloPaySDK.init(2553, Environment.SANDBOX)
+        ZaloPaySDK.init(2554, Environment.SANDBOX)
         binding = FragmentCheckOutBinding.inflate(layoutInflater, container, false)
         return binding?.root
     }
@@ -108,7 +108,7 @@ class CheckOutFragment : Fragment() {
             }
         }, 500)
         val items =
-            arrayOf("Thanh toán bằng MoMo", "Thanh toán bằng ZaloPay", "Thanh toán bằng tiền mặt")
+            arrayOf("Thanh toán bằng ZaloPay", "Thanh toán bằng tiền mặt")
 
         // Kết nối ArrayAdapter với Spinner
         val adapterSpinner = ArrayAdapter(requireContext(), R.layout.item_spinner, items)
@@ -138,8 +138,8 @@ class CheckOutFragment : Fragment() {
             }
             textPayment.setOnClickListener {
                 when (idPayment) {
-                    1L -> paymentZalopay()
-                    2L -> paymentCash()
+                    0L -> paymentZalopay()
+                    1L -> paymentCash()
                 }
 
                 check = true
@@ -176,11 +176,10 @@ class CheckOutFragment : Fragment() {
             val amount = binding?.textTotalPrice?.text?.replace(Regex("\\D"), "")
             val data = orderApi.createOrder(amount.toString())
             val code = data?.getString("return_code")
-//            Toast.makeText(requireContext(), "return_code: $code", Toast.LENGTH_LONG).show()
-            Toast.makeText(requireContext(), "Chuyển sang ứng dụng zalopay", Toast.LENGTH_SHORT)
+            Toast.makeText(requireContext(), "Đang chuyển sang ứng dụng zalopay", Toast.LENGTH_SHORT)
                 .show()
             if (code == "1") {
-                token = data.getString("zp_trans_token")
+                token = data.getString("zp_trans_token")  //Mã zp_trans_token của đơn hàng thanh toán
             }
         } catch (e: Exception) {
             e.printStackTrace()

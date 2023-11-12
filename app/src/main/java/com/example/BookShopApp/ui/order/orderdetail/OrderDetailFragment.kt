@@ -1,9 +1,11 @@
 package com.example.BookShopApp.ui.order.orderdetail
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +13,15 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.BookShopApp.R
 import com.example.BookShopApp.data.model.OrderDetail
+import com.example.BookShopApp.data.model.response.order.OrderDetailProduct
 import com.example.BookShopApp.databinding.FragmentOrderDetailBinding
+import com.example.BookShopApp.databinding.LayoutAlertBinding
 import com.example.BookShopApp.ui.adapter.OrderDetailAdapter
+import com.example.BookShopApp.ui.profile.profilesignin.ProfileSignInFragment
+import com.example.BookShopApp.utils.AlertMessageViewer
+import com.example.BookShopApp.utils.MySharedPreferences
 import com.example.BookShopApp.utils.format.FormatDate
 import com.example.BookShopApp.utils.format.FormatMoney
 
@@ -44,8 +52,16 @@ class OrderDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = OrderDetailAdapter()
         binding?.loadingLayout?.root?.visibility = View.VISIBLE
+        val bindingAlert = LayoutAlertBinding.inflate(LayoutInflater.from(context))
+        val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext(), R.style.CustomAlertDialogTheme)
+            .setView(bindingAlert.root)
+        val dialog = builder.create()
+        dialog.setCancelable(false)
         val orderId = arguments?.getString("orderId")?.toInt()
         val orderStatus = arguments?.getString("orderStatus")
+        if(orderStatus.equals("Đang chuẩn bị")){
+            binding?.textCancelOrder?.visibility=View.VISIBLE
+        }
         orderId?.let { orderId ->
             viewModel.orderDetailList.observe(viewLifecycleOwner, Observer { orderDetail ->
                 adapter.setData(orderDetail.products)
@@ -59,6 +75,30 @@ class OrderDetailFragment : Fragment() {
             imageLeftOrder.setOnClickListener {
                 parentFragmentManager.popBackStack()
             }
+            textCancelOrder.setOnClickListener {
+//                AlertDialog.Builder(requireContext())
+//                    .setTitle(null)
+//                    .setMessage("Bạn chắc chắn muốn hủy đơn hàng này!")
+//                    .setCancelable(true)
+//                    .setPositiveButton("Xác nhận") { dialog, _ ->
+//                        dialog.cancel()
+//                    }
+//                    .setNegativeButton("Hủy"){dialog, _->
+//                        dialog.cancel()
+//                    }
+//                    .show()
+                bindingAlert.textDescription.text = "Bạn chắc chắn muốn hủyd dơn hàng này!"
+                bindingAlert.textConfirm.setOnClickListener {
+                    orderId?.let { id -> viewModel.updateOrderStatus(id, 4) }
+                    textOrderStatus.text="Đã hủy"
+                    binding?.textCancelOrder?.visibility=View.GONE
+                    dialog.dismiss()
+                }
+                bindingAlert.textCancel.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.show()
+            }
         }
     }
 
@@ -71,14 +111,23 @@ class OrderDetailFragment : Fragment() {
                 textOrderDate.text.toString() + " " + formatDate.formatDate(it.createdOn)
             textOrderAddress.text =
                 textOrderAddress.text.toString() + " " + it.address
+            var totalProduct = 0
+            for (product: OrderDetailProduct in it.products) {
+                product.quantity?.let { totalProduct += it }
+
+            }
             textOrderSum.text =
-                textOrderSum.text.toString() + " " + it.products.size
+                textOrderSum.text.toString() + " " + totalProduct
             textOrderStatus.text = " $orderStatus"
             textTotalMoney.text = " " + it.orderTotal?.let { orderTotal ->
                 formatMoney.formatMoney(
                     orderTotal.toDouble().toLong()
                 )
             }
+
+            textPaymentMethod.text =
+                textPaymentMethod.text.toString() + " " + it.paymentMethod?.substring(16)
+                    ?.capitalize()
             textShippingType.text = textShippingType.text.toString() + " " + it.shippingType
             loadingLayout.root.visibility = View.INVISIBLE
         }

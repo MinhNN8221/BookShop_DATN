@@ -242,11 +242,11 @@ class RemoteDataSource() : IDataSource {
     }
 
     override suspend fun getNewBook(): Response<BookInHomeList>? {
-        return RetrofitClient.apiService.getHotBook()
+        return RetrofitClient.apiService.getNewBook()
     }
 
     override suspend fun getHotBook(): Response<BookInHomeList>? {
-        return RetrofitClient.apiService.getNewBook()
+        return RetrofitClient.apiService.getHotBook()
     }
 
     override suspend fun createOrder(
@@ -259,7 +259,9 @@ class RemoteDataSource() : IDataSource {
             cartId, shippingId, receiverId, paymentId
         )
     }
-
+    override suspend fun updateOrderStatus(orderId: Int, orderStatusId: Int): Response<Message> {
+        return RetrofitClient.apiService.updateOrderStatus(orderId, orderStatusId)
+    }
     override suspend fun getReceiverInfo(receiverId: Int): Response<Receiver> {
         return RetrofitClient.apiService.getReceiverInfo(receiverId)
     }

@@ -28,4 +28,8 @@ class OrderRepositoryImp(private val dataSource: IDataSource) : OrderRepository 
             paymentId
         )
     }
+
+    override suspend fun updateOrderStatus(orderId: Int, orderStatusId: Int): Response<Message> {
+        return dataSource.updateOrderStatus(orderId, orderStatusId)
+    }
 }

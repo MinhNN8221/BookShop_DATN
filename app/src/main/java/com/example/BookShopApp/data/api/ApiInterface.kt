@@ -218,6 +218,12 @@ interface ApiInterface {
         @Field("payment_id") paymentId: Int,
     ): Response<Message>
 
+    @PUT("orders/status")
+    suspend fun updateOrderStatus(
+        @Query("orderId") orderId: Int,
+        @Query("orderStatusId") orderStatusId: Int,
+    ): Response<Message>
+
     @GET("/receiver/{receiver_id}")
     suspend fun getReceiverInfo(@Path("receiver_id") receiverId: Int): Response<Receiver>
 

@@ -15,4 +15,6 @@ interface OrderRepository {
         receiverId: Int,
         paymentId: Int,
     ): Response<Message>
+
+    suspend fun updateOrderStatus(orderId: Int, orderStatusId: Int): Response<Message>
 }

@@ -130,7 +130,7 @@ class ProductdetailFragment : Fragment() {
         }
         viewModelWishList.wishList.observe(viewLifecycleOwner) { wishlist ->
             sizeWishList = wishlist.wishlist.size
-            Log.d("Size", wishlist.wishlist.toString())
+//            Log.d("Size", wishlist.wishlist.toString())
         }
     }
 

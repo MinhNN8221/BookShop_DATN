@@ -199,6 +199,7 @@
         android:id="@+id/spinner_payment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/primary"
         app:layout_constraintBottom_toTopOf="@id/text_checkout_product"
         app:layout_constraintEnd_toEndOf="@id/text_checkout"
         app:layout_constraintStart_toStartOf="@id/image_left" />
