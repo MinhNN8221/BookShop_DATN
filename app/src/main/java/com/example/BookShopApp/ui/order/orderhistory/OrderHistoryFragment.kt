@@ -3,6 +3,7 @@ package com.example.BookShopApp.ui.order.orderhistory
 import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.example.BookShopApp.databinding.FragmentOrderHistoryBinding
 import com.example.BookShopApp.ui.adapter.OnItemClickListener
 import com.example.BookShopApp.ui.adapter.OrderHistoryAdapter
 import com.example.BookShopApp.ui.order.orderdetail.OrderDetailFragment
+import com.example.BookShopApp.ui.order.ratingorder.RatingOrderFragment
 import com.example.BookShopApp.utils.format.FormatDate
 import java.time.LocalDateTime
 
@@ -89,6 +91,7 @@ class OrderHistoryFragment : Fragment() {
                 adapter.setData(list)
                 binding?.loadingLayout?.root?.visibility = View.INVISIBLE
             }
+            navOrderRating(list)
         })
     }
 
@@ -104,6 +107,21 @@ class OrderHistoryFragment : Fragment() {
                     .replace(R.id.container, OrderDetailFragment().apply { arguments = bundle })
                     .addToBackStack("Orderhistory")
                     .commit()
+            }
+        })
+    }
+
+    private fun navOrderRating(listOrder:List<OrderHistory>) {
+        adapter.setOnRatingItemClickListener(object : OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                val orderId = adapter.getOrder(position)?.orderId
+                val bundle = Bundle()
+                bundle.putString("orderId", orderId.toString())
+                bundle.putString("position", position.toString())
+                bundle.putSerializable("listOrder", ArrayList(listOrder))
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.container, RatingOrderFragment().apply { arguments = bundle })
+                    .addToBackStack("OrderDetail").commit()
             }
         })
     }

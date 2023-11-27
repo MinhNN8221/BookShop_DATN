@@ -1,6 +1,7 @@
 package com.example.BookShopApp.data.api
 
 import com.example.BookShopApp.data.model.*
+import com.example.BookShopApp.data.model.request.RatingRequest
 import com.example.BookShopApp.data.model.response.*
 import com.example.BookShopApp.data.model.response.auth.AuthResponse
 import com.example.BookShopApp.data.model.response.author.AuthorFamousList
@@ -119,6 +120,18 @@ interface ApiInterface {
         @Query("page") page: Int,
         @Query("description_length") description_length: Int,
     ): Response<ProductList>
+
+    @GET("products/rating")
+    suspend fun getAllRatingByBook(
+        @Query("bookId") bookId: Int,
+        @Query("limit") limit: Int,
+        @Query("page") page: Int,
+    ): Response<RatingResponse>
+
+    @POST("products/rating")
+    suspend fun createRatingOrder(
+        @Body ratingRequest: List<RatingRequest>,
+    ): Response<Message>
 
     @GET("author/hot")
     suspend fun getHotAuthor(): Response<AuthorFamousList>

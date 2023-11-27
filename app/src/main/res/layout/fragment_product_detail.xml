@@ -42,10 +42,10 @@
         android:id="@+id/constraint_image_product"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintDimensionRatio="w,5:6"
-        app:layout_constraintRight_toRightOf="@id/image_account"
         app:layout_constraintLeft_toLeftOf="@id/image_left"
+        app:layout_constraintRight_toRightOf="@id/image_account"
         app:layout_constraintTop_toBottomOf="@+id/image_left">
 
         <androidx.cardview.widget.CardView
@@ -54,6 +54,7 @@
             android:layout_height="match_parent"
             android:layout_margin="1dp"
             app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -62,7 +63,7 @@
                 android:id="@+id/image_pro"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="matrix" />
+                android:scaleType="fitCenter" />
         </androidx.cardview.widget.CardView>
 
         <ImageView
@@ -86,12 +87,14 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="32dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textColor="@color/primaryDeep"
         android:textSize="@dimen/dp_24"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraint_image_product" />
+        app:layout_constraintTop_toBottomOf="@id/constraint_image_product" />
 
     <TextView
         android:id="@+id/text_num"
@@ -101,9 +104,35 @@
         android:text="@string/quantity"
         android:textColor="@color/secondaryDeep"
         android:textSize="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/text_name"
-        app:layout_constraintStart_toStartOf="@+id/text_name"
-        app:layout_constraintTop_toBottomOf="@+id/text_name" />
+        app:layout_constraintEnd_toStartOf="@id/rating"
+        app:layout_constraintStart_toStartOf="@id/text_name"
+        app:layout_constraintTop_toBottomOf="@id/text_name" />
+
+    <RatingBar
+        android:id="@+id/rating"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:progressTint="@color/yellow"
+        android:rating="3"
+        android:isIndicator="true"
+        app:layout_constraintEnd_toEndOf="@id/text_rating_level"
+        app:layout_constraintStart_toEndOf="@id/text_num"
+        app:layout_constraintTop_toTopOf="@id/text_num" />
+
+    <TextView
+        android:id="@+id/text_rating_level"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginStart="7dp"
+        android:padding="5dp"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/text_num"
+        app:layout_constraintEnd_toEndOf="@id/text_name"
+        app:layout_constraintStart_toEndOf="@id/rating"
+        app:layout_constraintTop_toTopOf="@id/text_num" />
 
     <ScrollView
         android:id="@+id/scroll"
@@ -111,10 +140,10 @@
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="7dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraint_avatar_nxb"
-        app:layout_constraintEnd_toEndOf="@+id/text_name"
-        app:layout_constraintStart_toStartOf="@+id/text_name"
-        app:layout_constraintTop_toBottomOf="@+id/text_num">
+        app:layout_constraintBottom_toTopOf="@id/constraint_avatar_nxb"
+        app:layout_constraintEnd_toEndOf="@id/text_name"
+        app:layout_constraintStart_toStartOf="@id/text_name"
+        app:layout_constraintTop_toBottomOf="@id/text_num">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -136,12 +165,12 @@
                 android:id="@+id/text_ma"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:text="@string/productId"
                 android:textColor="@color/secondaryDeep"
                 android:textSize="14dp"
-                android:text="@string/productId"
                 app:layout_constraintEnd_toEndOf="@+id/text_info"
-                app:layout_constraintStart_toStartOf="@+id/text_info"
-                app:layout_constraintTop_toBottomOf="@+id/text_info" />
+                app:layout_constraintStart_toStartOf="@id/text_info"
+                app:layout_constraintTop_toBottomOf="@id/text_info" />
 
             <TextView
                 android:id="@+id/text_ncc"
@@ -150,9 +179,9 @@
                 android:text="@string/supplier"
                 android:textColor="@color/secondaryDeep"
                 android:textSize="14dp"
-                app:layout_constraintEnd_toEndOf="@+id/text_info"
-                app:layout_constraintStart_toStartOf="@+id/text_info"
-                app:layout_constraintTop_toBottomOf="@+id/text_ma" />
+                app:layout_constraintEnd_toEndOf="@id/text_info"
+                app:layout_constraintStart_toStartOf="@id/text_info"
+                app:layout_constraintTop_toBottomOf="@id/text_ma" />
 
             <TextView
                 android:id="@+id/text_author"
@@ -161,8 +190,8 @@
                 android:text="@string/author"
                 android:textColor="@color/secondaryDeep"
                 android:textSize="14dp"
-                app:layout_constraintStart_toStartOf="@+id/text_ncc"
-                app:layout_constraintTop_toBottomOf="@+id/text_ncc" />
+                app:layout_constraintStart_toStartOf="@id/text_ncc"
+                app:layout_constraintTop_toBottomOf="@id/text_ncc" />
 
             <TextView
                 android:id="@+id/text_name_author"
@@ -170,9 +199,9 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorAuth"
                 android:textSize="14dp"
-                app:layout_constraintEnd_toEndOf="@+id/text_ncc"
-                app:layout_constraintStart_toEndOf="@+id/text_author"
-                app:layout_constraintTop_toBottomOf="@+id/text_ncc" />
+                app:layout_constraintEnd_toEndOf="@id/text_ncc"
+                app:layout_constraintStart_toEndOf="@id/text_author"
+                app:layout_constraintTop_toBottomOf="@id/text_ncc" />
 
             <TextView
                 android:id="@+id/text_year"
@@ -181,20 +210,20 @@
                 android:text="@string/year"
                 android:textColor="@color/secondaryDeep"
                 android:textSize="14dp"
-                app:layout_constraintEnd_toEndOf="@+id/text_name_author"
-                app:layout_constraintStart_toStartOf="@+id/text_ncc"
-                app:layout_constraintTop_toBottomOf="@+id/text_author" />
+                app:layout_constraintEnd_toEndOf="@id/text_name_author"
+                app:layout_constraintStart_toStartOf="@id/text_ncc"
+                app:layout_constraintTop_toBottomOf="@id/text_author" />
 
             <TextView
                 android:id="@+id/text_language"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:text="@string/language"
                 android:textColor="@color/secondaryDeep"
                 android:textSize="14dp"
-                android:text="@string/language"
-                app:layout_constraintEnd_toEndOf="@+id/text_info"
-                app:layout_constraintStart_toStartOf="@+id/text_info"
-                app:layout_constraintTop_toBottomOf="@+id/text_year" />
+                app:layout_constraintEnd_toEndOf="@id/text_info"
+                app:layout_constraintStart_toStartOf="@id/text_info"
+                app:layout_constraintTop_toBottomOf="@id/text_year" />
 
             <TextView
                 android:id="@+id/text_description"
@@ -204,20 +233,21 @@
                 android:maxLines="3"
                 android:textColor="@color/secondaryDeep"
                 android:textSize="14dp"
-                app:layout_constraintEnd_toEndOf="@+id/text_info"
-                app:layout_constraintStart_toStartOf="@+id/text_info"
-                app:layout_constraintTop_toBottomOf="@+id/text_language" />
+                app:layout_constraintEnd_toEndOf="@id/text_info"
+                app:layout_constraintStart_toStartOf="@id/text_info"
+                app:layout_constraintTop_toBottomOf="@id/text_language" />
+
             <TextView
                 android:id="@+id/readmore"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:text="@string/readmore"
                 android:textColor="@color/primary"
                 android:textSize="14dp"
                 android:textStyle="bold"
-                android:text="@string/readmore"
-                app:layout_constraintEnd_toEndOf="@+id/text_info"
-                app:layout_constraintStart_toStartOf="@+id/text_info"
-                app:layout_constraintTop_toBottomOf="@+id/text_description" />
+                app:layout_constraintEnd_toEndOf="@id/text_info"
+                app:layout_constraintStart_toStartOf="@id/text_info"
+                app:layout_constraintTop_toBottomOf="@id/text_description" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
@@ -229,7 +259,7 @@
         android:layout_marginRight="8.5dp"
         android:layout_marginBottom="13dp"
         android:background="@drawable/bg_publish"
-        app:layout_constraintBottom_toTopOf="@+id/constraint_avatar_check"
+        app:layout_constraintBottom_toTopOf="@id/constraint_avatar_check"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -252,7 +282,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:src="@drawable/ic_pickup"
-            app:layout_constraintStart_toEndOf="@+id/text_publish"
+            app:layout_constraintStart_toEndOf="@id/text_publish"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -263,8 +293,8 @@
             android:text="Mua thêm các sản phẩm khác"
             android:textColor="@color/colorPublish"
             android:textSize="12dp"
-            app:layout_constraintStart_toStartOf="@+id/text_publish"
-            app:layout_constraintTop_toBottomOf="@+id/text_publish" />
+            app:layout_constraintStart_toStartOf="@id/text_publish"
+            app:layout_constraintTop_toBottomOf="@id/text_publish" />
 
         <TextView
             android:id="@+id/text_promotion"
@@ -275,8 +305,8 @@
             android:textColor="@color/status"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/text_buymore"
-            app:layout_constraintTop_toBottomOf="@+id/text_buymore" />
+            app:layout_constraintStart_toStartOf="@id/text_buymore"
+            app:layout_constraintTop_toBottomOf="@id/text_buymore" />
 
         <ImageView
             android:id="@+id/image_arrow"
@@ -288,7 +318,7 @@
             android:src="@drawable/ic_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_publish" />
+            app:layout_constraintTop_toBottomOf="@id/text_publish" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -306,10 +336,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginTop="23dp"
+            android:text="@string/price"
             android:textColor="@color/secondary"
             android:textSize="14dp"
-            android:text="@string/price"
-            app:layout_constraintBottom_toTopOf="@+id/text_price"
+            app:layout_constraintBottom_toTopOf="@id/text_price"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -322,8 +352,8 @@
             android:textColor="@color/white"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/text_price_name"
-            app:layout_constraintTop_toBottomOf="@+id/text_price_name" />
+            app:layout_constraintStart_toStartOf="@id/text_price_name"
+            app:layout_constraintTop_toBottomOf="@id/text_price_name" />
 
         <TextView
             android:id="@+id/text_additemtocart"

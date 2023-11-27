@@ -100,7 +100,7 @@ class SearchViewModel(application: Application) : ViewModel() {
 
     fun getSearchHistory(queryString: String) {
         job?.cancel()
-        job = viewModelScope.launch(Dispatchers.IO) {
+        job=viewModelScope.launch(Dispatchers.IO) {
             val response = searchRepository?.getSearchHistory(queryString)
             if (response?.isSuccessful == true) {
                 _productNameList.postValue(response.body()?.products)

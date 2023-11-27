@@ -43,6 +43,7 @@
     <string name="myOrder">Lịch sử mua hàng</string>
     <string name="myAddress">Địa chỉ</string>
     <string name="addressNew">Địa chỉ mới</string>
+    <string name="rating">Đánh giá</string>
     <string name="addressReceiver">Chọn địa chỉ nhận hàng</string>
     <string name="orderDetail">Thông tin đơn hàng</string>
     <string name="author">Tác giả</string>

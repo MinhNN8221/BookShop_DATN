@@ -37,8 +37,8 @@ data class AuthResponse(
         return customer.email.let { Patterns.EMAIL_ADDRESS.matcher(it).matches() }
     }
 
-    fun isPasswordGreaterThan4(): Boolean {
-        return customer.password.length >= 5
+    fun isPasswordGreaterThan5(password: String): Boolean {
+        return password.length >= 6 && password.matches("(?=.*\\d)(?=.*[a-zA-Z]).*".toRegex())
     }
 
     fun isPasswordMatch(password: String): Boolean {

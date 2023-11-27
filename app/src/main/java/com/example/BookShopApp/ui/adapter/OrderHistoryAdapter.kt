@@ -1,7 +1,9 @@
 package com.example.BookShopApp.ui.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.BookShopApp.data.model.Order
@@ -34,8 +36,13 @@ class OrderHistoryAdapter :
     }
 
     private var onItemClickListener: OnItemClickListener? = null
+    private var onRatingItemClickListener: OnItemClickListener? = null
     fun setOnItemClickListener(listener: OnItemClickListener) {
         onItemClickListener = listener
+    }
+
+    fun setOnRatingItemClickListener(listener: OnItemClickListener) {
+        onRatingItemClickListener = listener
     }
 
     override fun getItemCount(): Int {
@@ -48,6 +55,10 @@ class OrderHistoryAdapter :
 
     fun getOrder(position: Int): Order? {
         return orderHistoryList[position].order
+    }
+
+    fun setOrderIsRating(position: Int) {
+        orderHistoryList[position].order?.isRating = 1
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -75,10 +86,21 @@ class OrderHistoryAdapter :
             binding.textPrice.text = item.orderTotal?.toDouble()
                 ?.let { formatMoney.formatMoney(it.toLong()) }
             binding.textStatus.text = item.orderStatus
-            binding.iamgeNavRight.setOnClickListener {
+            binding.itemOrderHistory.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     onItemClickListener?.onItemClick(position)
+                }
+            }
+            if (item.isRating == 0 && item.orderStatus == "Đã giao hàng") {
+                binding.textRatingOrder.visibility = View.VISIBLE
+            }else{
+                binding.textRatingOrder.visibility = View.GONE
+            }
+            binding.textRatingOrder.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onRatingItemClickListener?.onItemClick(position)
                 }
             }
         }

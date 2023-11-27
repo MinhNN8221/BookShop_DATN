@@ -2,6 +2,7 @@ package com.example.BookShopApp.datasource.remote
 
 import com.example.BookShopApp.data.api.RetrofitClient
 import com.example.BookShopApp.data.model.*
+import com.example.BookShopApp.data.model.request.RatingRequest
 import com.example.BookShopApp.data.model.response.*
 import com.example.BookShopApp.data.model.response.auth.AuthResponse
 import com.example.BookShopApp.data.model.response.author.AuthorFamousList
@@ -30,7 +31,16 @@ class RemoteDataSource() : IDataSource {
     ): Response<AuthResponse> {
         return RetrofitClient.apiService.register(email, name, password)
     }
-
+    override suspend fun getAllRatingByBook(
+        bookId: Int,
+        limit: Int,
+        page: Int
+    ): Response<RatingResponse> {
+        return RetrofitClient.apiService.getAllRatingByBook(bookId, limit, page)
+    }
+    override suspend fun createRatingOrder(ratingRequest: List<RatingRequest>): Response<Message> {
+        return RetrofitClient.apiService.createRatingOrder(ratingRequest)
+    }
     override suspend fun getProductsBanner(): Response<BannerList>? {
         return RetrofitClient.apiService.getProductBanner()
     }

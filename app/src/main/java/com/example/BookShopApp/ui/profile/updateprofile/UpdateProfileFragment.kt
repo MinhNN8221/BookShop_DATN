@@ -141,7 +141,7 @@ class UpdateProfileFragment : Fragment() {
             if (it != null) {
                 bindData(it)
                 customer_id = it.customerId
-                shipping_region_id = it.shippingRegionId
+//                shipping_region_id = it.shippingRegionId
                 avatar = it.avatar
             }
         })

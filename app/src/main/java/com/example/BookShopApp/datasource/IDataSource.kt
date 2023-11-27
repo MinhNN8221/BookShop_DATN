@@ -1,6 +1,7 @@
 package com.example.BookShopApp.datasource
 
 import com.example.BookShopApp.data.model.*
+import com.example.BookShopApp.data.model.request.RatingRequest
 import com.example.BookShopApp.data.model.response.*
 import com.example.BookShopApp.data.model.response.auth.AuthResponse
 import com.example.BookShopApp.data.model.response.author.AuthorFamousList
@@ -14,7 +15,12 @@ interface IDataSource {
     suspend fun login(email: String, password: String): Response<AuthResponse>?
     suspend fun forgotPassword(email: String): Response<Message>
     suspend fun register(email: String, name: String, password: String): Response<AuthResponse>
-
+    suspend fun getAllRatingByBook(
+        bookId: Int,
+        limit:Int,
+        page: Int,
+    ): Response<RatingResponse>
+suspend fun createRatingOrder(ratingRequest:List<RatingRequest>):Response<Message>
     suspend fun getProductsBanner(): Response<BannerList>?
     suspend fun getSearchProducts(
         limit: Int,

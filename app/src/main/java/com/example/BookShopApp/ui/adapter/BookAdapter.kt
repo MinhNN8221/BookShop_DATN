@@ -5,6 +5,7 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.RelativeSizeSpan
 import android.text.style.StrikethroughSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -105,7 +106,7 @@ class BookAdapter(private val isNewArrival: Boolean) :
                 .load(product.thumbnail)
                 .centerCrop()
                 .into(binding.imageProduct)
-            if (product.discounted_price != null && product.discounted_price != product.price) {
+            if (product.discounted_price != product.price) {
                 val layoutParams =
                     binding.textPrice.layoutParams as ViewGroup.MarginLayoutParams
                 val newMarginTopInDp = 0
@@ -120,8 +121,13 @@ class BookAdapter(private val isNewArrival: Boolean) :
                         ?.let { formatMoney.formatMoney(it.toLong()) }.toString()
                 )
             } else {
+                val layoutParams =
+                    binding.textPrice.layoutParams as ViewGroup.MarginLayoutParams
+                layoutParams.topMargin = dpToPx(binding.root, 10)
+                binding.textPrice.layoutParams=layoutParams
                 binding.textPrice.text = product.price?.toDouble()
                     ?.let { formatMoney.formatMoney(it.toLong()) }
+                binding.textDiscountPrice.visibility=View.GONE
             }
 
             binding.textName.text = product.name
@@ -161,8 +167,13 @@ class BookAdapter(private val isNewArrival: Boolean) :
                         ?.let { formatMoney.formatMoney(it.toLong()) }.toString()
                 )
             } else {
+                val layoutParams =
+                    binding.textPrice.layoutParams as ViewGroup.MarginLayoutParams
+                layoutParams.topMargin = dpToPx(binding.root, 10)
+                binding.textPrice.layoutParams=layoutParams
                 binding.textPrice.text = product.price?.toDouble()
                     ?.let { formatMoney.formatMoney(it.toLong()) }
+                binding.textDiscountPrice.visibility=View.GONE
             }
             binding.cardview.setOnClickListener {
                 val position = adapterPosition
@@ -193,8 +204,13 @@ class BookAdapter(private val isNewArrival: Boolean) :
                         ?.let { formatMoney.formatMoney(it.toLong()) }.toString()
                 )
             } else {
+                val layoutParams =
+                    binding.textPrice.layoutParams as ViewGroup.MarginLayoutParams
+                layoutParams.topMargin = dpToPx(binding.root, 10)
+                binding.textPrice.layoutParams=layoutParams
                 binding.textPrice.text = product.price?.toDouble()
                     ?.let { formatMoney.formatMoney(it.toLong()) }
+                binding.textDiscountPrice.visibility=View.GONE
             }
             binding.textNameProduct.text = product.name
             binding.imageProduct.setOnClickListener {
@@ -223,5 +239,9 @@ class BookAdapter(private val isNewArrival: Boolean) :
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         return content
+    }
+    private fun dpToPx(view: View, dp: Int): Int {
+        val scale = view.resources.displayMetrics.density
+        return (dp * scale + 0.5f).toInt()
     }
 }

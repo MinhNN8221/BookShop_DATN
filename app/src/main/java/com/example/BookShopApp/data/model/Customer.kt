@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 
 data class Customer(
-    @SerializedName("customer_id")
+    @SerializedName("id")
     var customerId: Int? = null,
     @SerializedName("name")
     var name: String = "",
@@ -18,13 +18,13 @@ data class Customer(
     var passwordAgain: String = "",
     @SerializedName("address")
     var address: String = "",
-    @SerializedName("shipping_region_id")
-    var shippingRegionId: Int? = null,
-    @SerializedName("mob_phone")
+//    @SerializedName("shipping_region_id")
+//    var shippingRegionId: Int? = null,
+    @SerializedName("mobPhone")
     var mobPhone: String = "",
     @SerializedName("gender")
     var gender: String? = null,
-    @SerializedName("date_of_birth")
+    @SerializedName("dateOfBirth")
     var dateOfBirth: String? = null,
     @SerializedName("avatar")
     var avatar: String? = null,

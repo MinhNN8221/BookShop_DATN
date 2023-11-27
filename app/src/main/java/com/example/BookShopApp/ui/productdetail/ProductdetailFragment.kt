@@ -8,7 +8,6 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +20,7 @@ import com.example.BookShopApp.data.model.response.product.ProductInfoList
 import com.example.BookShopApp.databinding.FragmentProductDetailBinding
 import com.example.BookShopApp.ui.author.AuthorFragment
 import com.example.BookShopApp.ui.main.wishlist.WishlistViewModel
+import com.example.BookShopApp.ui.productdetail.ratingbook.RatingFragment
 import com.example.BookShopApp.ui.profile.ProfileFragment
 import com.example.BookShopApp.ui.publisher.PublisherFragment
 import com.example.BookShopApp.utils.AlertMessageViewer
@@ -116,6 +116,13 @@ class ProductdetailFragment : Fragment() {
                     .addToBackStack("ProductDetail")
                     .commit()
             }
+            textRatingLevel.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString("bookId", productId.toString())
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.container, RatingFragment().apply { arguments=bundle })
+                    .addToBackStack("ProductDetail").commit()
+            }
         }
     }
 
@@ -165,9 +172,11 @@ class ProductdetailFragment : Fragment() {
         binding?.apply {
             Glide.with(root)
                 .load(productInfoList.product.thumbnail)
-                .centerCrop()
+                .fitCenter()
                 .into(imagePro)
             textName.text = productInfoList.product.name
+            rating.rating=productInfoList.product.ratingLevel.toFloat()
+            textRatingLevel.text=productInfoList.product.ratingLevel.toString()
             textNum.text =
                 resources.getString(R.string.quantity) + " " + (productInfoList.product.quantity - productInfoList.product.quantitySold)
             textMa.text =

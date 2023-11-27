@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="7dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_margin="7dp"
+        app:cardCornerRadius="7dp"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintEnd_toStartOf="@id/text_name_book"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/image_product"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder_default_loading" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/text_id_book"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/cardview"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_name_book"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Vấp ngã là một lần trường thành"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cardview"
+        app:layout_constraintTop_toTopOf="@id/cardview" />
+
+    <TextView
+        android:id="@+id/text_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="Một tác phẩm được nhiều người bình chọn"
+        android:textColor="@color/black"
+        android:textSize="13dp"
+        app:layout_constraintEnd_toEndOf="@id/text_name_book"
+        app:layout_constraintStart_toStartOf="@id/text_name_book"
+        app:layout_constraintTop_toBottomOf="@id/text_name_book" />
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/line"
+        app:layout_constraintEnd_toEndOf="@id/text_name_book"
+        app:layout_constraintStart_toStartOf="@id/cardview"
+        app:layout_constraintTop_toBottomOf="@id/cardview" />
+
+    <TextView
+        android:id="@+id/text_product_quanlity"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="Chất lượng sản phẩm"
+        android:textColor="@color/black"
+        android:textSize="13dp"
+        app:layout_constraintStart_toStartOf="@id/cardview"
+        app:layout_constraintTop_toBottomOf="@id/view_line" />
+
+    <RatingBar
+        android:id="@+id/ratingbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:layout_marginStart="-27dp"
+        android:progressTint="@color/yellow"
+        android:progressBackgroundTint="@color/secondaryDeep"
+        android:rating="3"
+        android:scaleX="0.7"
+        android:scaleY="0.6"
+        android:stepSize="1"
+        app:layout_constraintBottom_toBottomOf="@id/text_product_quanlity"
+        app:layout_constraintStart_toEndOf="@id/text_product_quanlity"
+        app:layout_constraintTop_toTopOf="@id/text_product_quanlity" />
+
+    <TextView
+        android:id="@+id/satisfaction_level"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-20dp"
+
+        android:text="Bình thường"
+        android:textColor="@color/primaryDeep"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toBottomOf="@id/text_product_quanlity"
+        app:layout_constraintEnd_toEndOf="@id/text_name_book"
+        app:layout_constraintStart_toEndOf="@id/ratingbar"
+        app:layout_constraintTop_toTopOf="@id/text_product_quanlity" />
+
+    <EditText
+        android:id="@+id/edit_comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/bg_auth_text_field"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:minLines="5"
+        android:hint="Hãy chia sẻ nhận xét cho sản phẩm này!"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/text_name_book"
+        app:layout_constraintStart_toStartOf="@id/text_product_quanlity"
+        app:layout_constraintTop_toBottomOf="@id/text_product_quanlity" />
+</androidx.constraintlayout.widget.ConstraintLayout>

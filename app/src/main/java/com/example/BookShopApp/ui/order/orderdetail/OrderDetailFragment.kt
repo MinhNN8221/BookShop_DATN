@@ -19,6 +19,7 @@ import com.example.BookShopApp.data.model.response.order.OrderDetailProduct
 import com.example.BookShopApp.databinding.FragmentOrderDetailBinding
 import com.example.BookShopApp.databinding.LayoutAlertBinding
 import com.example.BookShopApp.ui.adapter.OrderDetailAdapter
+import com.example.BookShopApp.ui.order.ratingorder.RatingOrderFragment
 import com.example.BookShopApp.ui.profile.profilesignin.ProfileSignInFragment
 import com.example.BookShopApp.utils.AlertMessageViewer
 import com.example.BookShopApp.utils.MySharedPreferences
@@ -59,9 +60,13 @@ class OrderDetailFragment : Fragment() {
         dialog.setCancelable(false)
         val orderId = arguments?.getString("orderId")?.toInt()
         val orderStatus = arguments?.getString("orderStatus")
+        val isRating = arguments?.getString("isRating")?.toInt()
         if(orderStatus.equals("Đang chuẩn bị")){
             binding?.textCancelOrder?.visibility=View.VISIBLE
         }
+//        if(orderStatus.equals("Đã giao hàng") && isRating!=1){
+//            binding?.textRatingOrder?.visibility=View.VISIBLE
+//        }
         orderId?.let { orderId ->
             viewModel.orderDetailList.observe(viewLifecycleOwner, Observer { orderDetail ->
                 adapter.setData(orderDetail.products)
@@ -76,18 +81,7 @@ class OrderDetailFragment : Fragment() {
                 parentFragmentManager.popBackStack()
             }
             textCancelOrder.setOnClickListener {
-//                AlertDialog.Builder(requireContext())
-//                    .setTitle(null)
-//                    .setMessage("Bạn chắc chắn muốn hủy đơn hàng này!")
-//                    .setCancelable(true)
-//                    .setPositiveButton("Xác nhận") { dialog, _ ->
-//                        dialog.cancel()
-//                    }
-//                    .setNegativeButton("Hủy"){dialog, _->
-//                        dialog.cancel()
-//                    }
-//                    .show()
-                bindingAlert.textDescription.text = "Bạn chắc chắn muốn hủyd dơn hàng này!"
+                bindingAlert.textDescription.text = "Bạn chắc chắn muốn hủy đơn hàng này!"
                 bindingAlert.textConfirm.setOnClickListener {
                     orderId?.let { id -> viewModel.updateOrderStatus(id, 4) }
                     textOrderStatus.text="Đã hủy"

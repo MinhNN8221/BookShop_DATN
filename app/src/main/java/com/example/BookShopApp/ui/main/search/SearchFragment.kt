@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -109,6 +110,19 @@ class SearchFragment : Fragment() {
                     horizontalSpacing, verticalSpacing
                 )
             )
+            imageLeft.setOnClickListener {
+                groupHistorySearch.visibility = View.INVISIBLE
+                groupSearch.visibility = View.VISIBLE
+                imageLeft.visibility=View.GONE
+                val layoutParams =
+                    editSearch.layoutParams as ViewGroup.MarginLayoutParams
+                layoutParams.marginStart = dpToPx(root, 24)
+                editSearch.layoutParams=layoutParams
+                val inputMethodManager =
+                    requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(editSearch.windowToken, 0)
+                editSearch.clearFocus()
+            }
             layoutSearch.setOnTouchListener { view, motionEvent ->
                 if (motionEvent.action == MotionEvent.ACTION_DOWN) {
                     val event =
@@ -179,6 +193,11 @@ class SearchFragment : Fragment() {
                     groupSearch.visibility = View.INVISIBLE
                     viewModel.getHistorySearchLocal(idCustomer)
                     textRemoveAll.visibility = View.INVISIBLE
+                    imageLeft.visibility=View.VISIBLE
+                    val layoutParams =
+                        editSearch.layoutParams as ViewGroup.MarginLayoutParams
+                    layoutParams.marginStart =0
+                    editSearch.layoutParams=layoutParams
                 } else {
                 }
             }
@@ -205,6 +224,9 @@ class SearchFragment : Fragment() {
                         layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
                         textTitleSearch.layoutParams = layoutParams
                     } else {
+//                        Handler(Looper.getMainLooper()).postDelayed({
+//                            viewModel.getSearchHistory(queryString)
+//                        }, 3000L)
                         viewModel.getSearchHistory(queryString)
                         textTitleSearch.visibility = View.INVISIBLE
                         layoutParams.height = 0
@@ -529,6 +551,10 @@ class SearchFragment : Fragment() {
             filterType,
             "asc"
         )
+    }
+    private fun dpToPx(view: View, dp: Int): Int {
+        val scale = view.resources.displayMetrics.density
+        return (dp * scale + 0.5f).toInt()
     }
 }
 

@@ -6,9 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:paddingLeft="@dimen/dp_24"
-    android:paddingTop="22dp"
-    android:paddingRight="@dimen/dp_24">
+   >
+
+    <ImageView
+        android:id="@+id/image_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="11dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_search"
+        app:layout_constraintEnd_toStartOf="@id/edit_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/edit_search" />
 
     <EditText
         android:id="@+id/edit_search"
@@ -23,19 +33,20 @@
         android:textColor="@color/primary"
         android:textColorHint="@color/primary"
         android:textSize="20dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="24dp"
         app:layout_constraintBottom_toTopOf="@+id/constraint_filter"
         app:layout_constraintEnd_toStartOf="@+id/image_seach"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_left"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/image_seach"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:layout_marginBottom="14dp"
         android:padding="11dp"
         android:src="@drawable/ic_search"
+        android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/edit_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edit_search"
@@ -47,12 +58,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/history_search"
+        android:layout_marginStart="15dp"
         android:textColor="@color/black"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/image_seach"
-        app:layout_constraintStart_toStartOf="@+id/edit_search"
-        app:layout_constraintTop_toBottomOf="@+id/edit_search" />
+        app:layout_constraintEnd_toEndOf="@id/image_seach"
+        app:layout_constraintStart_toStartOf="@id/image_left"
+        app:layout_constraintTop_toBottomOf="@id/edit_search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_history_search"

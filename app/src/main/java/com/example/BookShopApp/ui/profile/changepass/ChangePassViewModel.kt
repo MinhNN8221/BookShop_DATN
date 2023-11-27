@@ -19,14 +19,15 @@ class ChangePassViewModel : ViewModel() {
 
     fun checkFields(user: AuthResponse) {
         if (user.isChangePassEmpty()) {
-            _message.postValue("Fields cannot be empty!")
+            _message.postValue("Các trường không được để trống!")
             return
         }
-        if (!user.isPasswordGreaterThan4()) {
-            _message.postValue("Password must be greater than 4 characters!")
+        if (!user.isPasswordGreaterThan5(user.customer.password) || !user.isPasswordGreaterThan5(user.customer.newPassword)) {
+            _message.postValue("Mật khẩu phải lớn hơn 5 và phải bao gồm cả chữ và số!")
+            return
         }
         if (!user.isPasswordMatch(user.customer.newPassword)) {
-            _message.postValue("Passwords don't match!")
+            _message.postValue("Mật khẩu không khớp!")
             return
         }
         changePassword(user)
@@ -40,7 +41,7 @@ class ChangePassViewModel : ViewModel() {
                 user.customer.newPassword
             )
             if (response?.isSuccessful == true) {
-                message.postValue("Update Password Successful")
+                message.postValue("Thay đổi mật khẩu thành công")
             } else {
                 val errorBody = response?.errorBody()?.string()
                 val gson = Gson()

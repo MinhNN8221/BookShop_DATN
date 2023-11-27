@@ -49,12 +49,12 @@ class SignInViewModel : ViewModel() {
             return
         }
 
-        if (!user.isPasswordGreaterThan4()) {
+        if (!user.isPasswordGreaterThan5(user.customer.password)) {
             _loginResponse.postValue(
                 AuthState(
                     Error(
                         message =
-                        "Mật khẩu phải dài hơn 5 kí tự"
+                        "Mật khẩu phải dài hơn 5 kí tự bao gồm cả chữ và số"
                     ),
                     null
                 )

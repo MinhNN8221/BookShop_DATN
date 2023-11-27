@@ -14,6 +14,7 @@ class ProductInfo(
     @SerializedName("discounted_price")
     var discountedPrice: String,
     @SerializedName("quantity") var quantity: Int,
+    @SerializedName("ratingLevel") var ratingLevel: Double,
     @SerializedName("quantitySold") var quantitySold: Int,
     @SerializedName("thumbnail")
     var thumbnail: String,

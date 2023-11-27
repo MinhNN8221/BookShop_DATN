@@ -34,18 +34,18 @@ class SignUpViewModel : ViewModel() {
         if (!user.isValidEmail()) {
             _registerResponse.postValue(
                 AuthState(
-                    Error(message = "Please enter a valid email address!"),
+                    Error(message = "Hãy nhập địa chỉ email hợp lệ!"),
                     null
                 )
             )
             return
         }
-        if (!user.isPasswordGreaterThan4()) {
+        if (!user.isPasswordGreaterThan5(user.customer.password)) {
             _registerResponse.postValue(
                 AuthState(
                     Error(
                         message =
-                        "Password must be greater than 4 characters!"
+                        "Mật khẩu phải dài hơn 5 ký tự bao gồm cả chữ và số!"
                     ),
                     null
                 )
@@ -53,7 +53,7 @@ class SignUpViewModel : ViewModel() {
             return
         }
         if (!user.isPasswordMatch(user.customer.password)) {
-            _registerResponse.postValue(AuthState(Error(message = "Passwords don't match!"), null))
+            _registerResponse.postValue(AuthState(Error(message = "Mật khẩu không khớp!"), null))
             return
         }
         signUp(user)
@@ -69,7 +69,7 @@ class SignUpViewModel : ViewModel() {
             if (response.isSuccessful == true) {
                 _registerResponse.postValue(
                     AuthState(
-                        Error(message = "Register Successful!"),
+                        Error(message = "Đăng kí thành công!"),
                         response.body()
                     )
                 )

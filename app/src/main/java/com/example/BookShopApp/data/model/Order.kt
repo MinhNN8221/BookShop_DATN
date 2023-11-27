@@ -17,4 +17,5 @@ data class Order(
     @SerializedName("shipping_cost") var shippingCost: String?,
     @SerializedName("order_status") var orderStatus: String?,
     @SerializedName("order_total") var orderTotal: String?,
+    @SerializedName("isRating") var isRating:Int?,
 )
