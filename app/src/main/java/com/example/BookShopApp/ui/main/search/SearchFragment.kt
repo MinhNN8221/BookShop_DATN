@@ -111,17 +111,18 @@ class SearchFragment : Fragment() {
                 )
             )
             imageLeft.setOnClickListener {
-                groupHistorySearch.visibility = View.INVISIBLE
-                groupSearch.visibility = View.VISIBLE
-                imageLeft.visibility=View.GONE
-                val layoutParams =
-                    editSearch.layoutParams as ViewGroup.MarginLayoutParams
-                layoutParams.marginStart = dpToPx(root, 24)
-                editSearch.layoutParams=layoutParams
+                currentPage = 1
+                pastPage = -1
+                viewModel.getSearchProducts(10, currentPage, 100, "", 1, "asc")
+                marginEditSearch()
                 val inputMethodManager =
                     requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(editSearch.windowToken, 0)
                 editSearch.clearFocus()
+                editSearch.text.clear()
+                groupHistorySearch.visibility = View.GONE
+                groupSearch.visibility = View.VISIBLE
+                imageLeft.visibility=View.GONE
             }
             layoutSearch.setOnTouchListener { view, motionEvent ->
                 if (motionEvent.action == MotionEvent.ACTION_DOWN) {
@@ -256,6 +257,8 @@ class SearchFragment : Fragment() {
                     requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(editSearch.windowToken, 0)
                 editSearch.clearFocus()
+                marginEditSearch()
+                imageLeft.visibility=View.GONE
                 groupHistorySearch.visibility = View.INVISIBLE
                 groupSearch.visibility = View.VISIBLE
             }
@@ -289,6 +292,8 @@ class SearchFragment : Fragment() {
                         requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     inputMethodManager.hideSoftInputFromWindow(editSearch.windowToken, 0)
                     editSearch.clearFocus()
+                    imageLeft.visibility=View.GONE
+                    marginEditSearch()
                     groupHistorySearch.visibility = View.INVISIBLE
                     groupSearch.visibility = View.VISIBLE
                     return@setOnEditorActionListener true
@@ -505,6 +510,8 @@ class SearchFragment : Fragment() {
                     editSearch.setText(productName)
                     inputMethodManager.hideSoftInputFromWindow(editSearch.windowToken, 0)
                     editSearch.clearFocus()
+                    imageLeft.visibility=View.GONE
+                    marginEditSearch()
                     groupHistorySearch.visibility = View.INVISIBLE
                     groupSearch.visibility = View.VISIBLE
                 }
@@ -555,6 +562,14 @@ class SearchFragment : Fragment() {
     private fun dpToPx(view: View, dp: Int): Int {
         val scale = view.resources.displayMetrics.density
         return (dp * scale + 0.5f).toInt()
+    }
+    private fun marginEditSearch(){
+        binding?.apply {
+            val layoutParams =
+                editSearch.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.marginStart = dpToPx(root, 24)
+            editSearch.layoutParams=layoutParams
+        }
     }
 }
 

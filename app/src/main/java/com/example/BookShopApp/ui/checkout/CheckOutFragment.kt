@@ -142,7 +142,7 @@ class CheckOutFragment : Fragment() {
                     1L -> paymentCash()
                 }
 
-                check = true
+//                check = true
 //                loadingProgressBar.show()
             }
             imageLeft.setOnClickListener {
@@ -155,6 +155,7 @@ class CheckOutFragment : Fragment() {
     }
 
     private fun paymentCash() {
+        check = true
         createOrder(1)
         loadingProgressBar.show()
     }
