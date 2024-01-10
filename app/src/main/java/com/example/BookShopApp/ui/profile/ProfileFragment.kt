@@ -19,6 +19,7 @@ import com.example.BookShopApp.ui.profile.receiver.receiverinfo.ReceiverInfoFrag
 import com.example.BookShopApp.ui.profile.changepass.ChangePassFragment
 import com.example.BookShopApp.ui.profile.profilesignin.ProfileSignInFragment
 import com.example.BookShopApp.ui.profile.updateprofile.UpdateProfileFragment
+import com.example.BookShopApp.utils.AlertMessageViewer
 import com.example.BookShopApp.utils.LoadingProgressBar
 import com.example.BookShopApp.utils.MySharedPreferences
 
@@ -111,6 +112,12 @@ class ProfileFragment : Fragment() {
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.container, OrderHistoryFragment()).addToBackStack("profile")
                     .commit()
+            }
+            linearFeedback.setOnClickListener {
+                AlertMessageViewer.showAlertDialogMessage(
+                    requireContext(),
+                    "Chức năng đang được phát triển"
+                )
             }
         }
     }

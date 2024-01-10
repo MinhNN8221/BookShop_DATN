@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">BookShopApp</string>
-    <string name="Welcome" />
     <string name="home">Trang chủ</string>
     <string name="textLogin">Chào mừng bạn đến với BookShop! Hãy đăng nhập để mua hàng!</string>
     <string name="forgot_password">Quên mật khẩu?</string>

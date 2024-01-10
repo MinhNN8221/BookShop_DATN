@@ -8,31 +8,31 @@ import org.json.JSONObject
 import java.util.*
 
 class CreateOrder {
-    private inner class CreateOrderData(amount: String) {
-        var AppId: String
-        var AppUser: String
-        var AppTime: String
-        var Amount: String
-        var AppTransId: String
-        var EmbedData: String
-        var Items: String
-        var BankCode: String
-        var Description: String
-        var Mac: String
+    private inner class CreateOrderData(amountTotal: String) {
+        var appId: String           //Định danh cho ứng dụng đã được cấp khi đăng ký ứng dụng với ZaloPay.
+        var appUser: String         //Thông tin định danh của người dùng ứng dụng thanh toán đơn hàng.
+        var appTime: String         //Thời gian tạo đơn hàng
+        var amount: String          //giá trị của đơn hàng
+        var appTransId: String      //Mã giao dịch của đơn hàng
+        var embedData: String       //
+        var items: String           //Item của đơn hàng, do ứng dụng tự định nghĩa
+        var bankCode: String        //Mã ngân hàng
+        var description: String
+        var mac: String             //Thông tin chứng thực của đơn hàng
 
         init {
-            val appTime = Date().time
-            AppId = AppZaloPayInfo.APP_ID.toString()
-            AppUser = "Android_Demo"
-            AppTime = appTime.toString()
-            Amount = amount
-            AppTransId = Helpers().getAppTransId()
-            EmbedData = "{}"
-            Items = "[]"
-            BankCode = "zalopayapp"
-            Description = "Thanh toán đơn hàng cho BOOKSHOP"
-            val inputHMac = "${this.AppId}|${this.AppTransId}|${this.AppUser}|${this.Amount}|${this.AppTime}|${this.EmbedData}|${this.Items}"
-            Mac = Helpers().getMac(AppZaloPayInfo.MAC_KEY, inputHMac).toString()
+            val dateTime = Date().time
+            appId = AppZaloPayInfo.APP_ID.toString()
+            appUser = "Android_Demo"
+            appTime = dateTime.toString()
+            amount = amountTotal
+            appTransId = Helpers().getAppTransId()
+            embedData = "{}"
+            items = "[]"
+            bankCode = "zalopayapp"
+            description = "Thanh toán đơn hàng cho BOOKSHOP"
+            val inputHMac = "${this.appId}|${this.appTransId}|${this.appUser}|${this.amount}|${this.appTime}|${this.embedData}|${this.items}"
+            mac = Helpers().getMac(AppZaloPayInfo.MAC_KEY, inputHMac).toString()
         }
     }
 
@@ -40,16 +40,16 @@ class CreateOrder {
         val input = CreateOrderData(amount)
 
         val formBody = FormBody.Builder()
-            .add("app_id", input.AppId)
-            .add("app_user", input.AppUser)
-            .add("app_time", input.AppTime)
-            .add("amount", input.Amount)
-            .add("app_trans_id", input.AppTransId)
-            .add("embed_data", input.EmbedData)
-            .add("item", input.Items)
-            .add("bank_code", input.BankCode)
-            .add("description", input.Description)
-            .add("mac", input.Mac)
+            .add("app_id", input.appId)
+            .add("app_user", input.appUser)
+            .add("app_time", input.appTime)
+            .add("amount", input.amount)
+            .add("app_trans_id", input.appTransId)
+            .add("embed_data", input.embedData)
+            .add("item", input.items)
+            .add("bank_code", input.bankCode)
+            .add("description", input.description)
+            .add("mac", input.mac)
             .build()
 
         return HttpProvider().sendPost(AppZaloPayInfo.URL_CREATE_ORDER, formBody)
